@@ -13,9 +13,9 @@ This is project template
 1. nodemon
 1. joi
 1. bcrypt
-1. jsonwebtoken
+1. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 1. crypto
-1. ioredis
+1. [ioredis](https://www.npmjs.com/package/ioredis)
 # Extensions Node
 
 1. [redis-commander](https://www.npmjs.com/package/redis-commander)
