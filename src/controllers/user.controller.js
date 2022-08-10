@@ -120,4 +120,12 @@ module.exports = {
       next(error);
     }
   },
+  testErrorApi: async (req, res, next) => {
+    try {
+      console.log("Don't find arg", a);
+      return res.json({ status: true });
+    } catch (error) {
+      next(error);
+    }
+  },
 };

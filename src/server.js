@@ -2,9 +2,11 @@ require("dotenv").config();
 
 const express = require("express");
 const helmet = require("helmet");
+const morgan = require("morgan");
 const helmetConfig = require("./configs/helmet.config");
 const app = express();
 
+app.use(morgan("common"));
 app.use(
   helmet({
     ...helmetConfig.default,
@@ -19,7 +21,6 @@ app.use(
 );
 
 const userRoute = require("./routes/user.route");
-
 // require("./helpers/connection.mongodb");
 require("./datasources/connection.redis");
 
@@ -41,7 +42,7 @@ app.use((req, res, next) => {
   //   const error = new Error("Not found");
   //   error.status = 500;
   //   next(error);
-  next(createError.NotFound("This route does not exist"));
+  next(createError.NotFound("Page not found!"));
 });
 
 app.use((err, req, res, next) => {

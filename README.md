@@ -29,6 +29,7 @@ REFRESH_TOKEN_SECRET=
 1. crypto
 1. [ioredis](https://www.npmjs.com/package/ioredis)
 1. [helmet](https://www.npmjs.com/package/helmet)
+1. [morgan](https://www.npmjs.com/package/morgan)
 
 # Extensions Node
 
