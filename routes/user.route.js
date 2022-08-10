@@ -7,6 +7,7 @@ const {
   signAccessToken,
   signRefreshToken,
   veryfyAccessToken,
+  veryfyRefreshToken,
 } = require("../helpers/jwt_service");
 
 const UserModel = require("../models/user.model");
@@ -52,8 +53,22 @@ route.post("/register", async (req, res, next) => {
   }
 });
 
-route.post("/refresh-token", (req, res, next) => {
-  res.send("Post refresh token");
+route.post("/refresh-token", async (req, res, next) => {
+  try {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+      throw createError.BadRequest();
+    }
+    const { userId } = await veryfyRefreshToken(refreshToken);
+    const accessToken = await signAccessToken(userId);
+    const refrToken = await signRefreshToken(userId);
+    return res.json({
+      accessToken,
+      refreshToken: refrToken,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 route.post("/login", async (req, res, next) => {
