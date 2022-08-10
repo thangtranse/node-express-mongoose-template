@@ -1,7 +1,9 @@
 const express = require("express");
 const route = express.Router();
 const createError = require("http-errors");
+
 const { userValidate } = require("../helpers/validation");
+const { signAccessToken } = require("../helpers/jwt_service");
 
 const UserModel = require("../models/user.model");
 
@@ -9,7 +11,7 @@ route.post("/register", async (req, res, next) => {
   try {
     const { error } = userValidate(req.body);
     const { email, password } = req.body;
-    
+
     if (error) {
       console.log(`Error:: ${error}`);
       throw createError(error.details[0].message);
@@ -68,7 +70,8 @@ route.post("/login", async (req, res, next) => {
     if (!isValid) {
       throw createError.Unauthorized();
     }
-    return res.send(isUser);
+    const accessToken = await signAccessToken(isUser._id);
+    return res.json(accessToken);
   } catch (error) {
     next(error);
   }

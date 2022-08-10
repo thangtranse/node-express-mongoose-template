@@ -13,6 +13,7 @@ This is project template
 1. nodemon
 1. joi
 1. bcrypt
+1. jsonwebtoken
 # Extensions vscode
 
 1. REST Client
