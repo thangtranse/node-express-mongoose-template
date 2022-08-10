@@ -3,7 +3,10 @@ const route = express.Router();
 const createError = require("http-errors");
 
 const { userValidate } = require("../helpers/validation");
-const { signAccessToken } = require("../helpers/jwt_service");
+const {
+  signAccessToken,
+  veryfyAccessToken,
+} = require("../helpers/jwt_service");
 
 const UserModel = require("../models/user.model");
 
@@ -79,6 +82,14 @@ route.post("/login", async (req, res, next) => {
 
 route.get("/logout", (req, res, next) => {
   res.send("Get Logout");
+});
+
+route.get("/get-list-account", veryfyAccessToken, (req, res, next) => {
+  try {
+    return res.json({ status: true });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = route;
