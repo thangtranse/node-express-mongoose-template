@@ -22,4 +22,13 @@ const userSchema = new Schema({
 //   userUsersModel: usersDbConnection.model("user", userSchema),
 // };
 
+// mid
+userSchema.pre("save", async function (next) {
+  try {
+    console.log("Called before save::", this.username, this.password);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = dbConnected.model("users", userSchema);

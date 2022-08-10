@@ -22,13 +22,23 @@ route.post("/register", async (req, res, next) => {
     if (isExits) {
       throw createError.Conflict(`${email} is ready been register`);
     }
-    const isCreate = await UserModel.create({
+
+    // mid don't support method create
+    // const isCreate = await UserModel.create({
+    //   username: email,
+    //   password: password,
+    // });
+
+    const user = await UserModel({
       username: email,
       password: password,
     });
+
+    const saveUser = await user.save();
+
     return res.json({
       status: true,
-      data: isCreate,
+      data: saveUser,
     });
   } catch (error) {
     next(error);
