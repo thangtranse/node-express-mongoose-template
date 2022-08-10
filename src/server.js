@@ -35,7 +35,7 @@ app.use(
 app.get("/", (req, res, next) => {
   res.send("Hello World");
 });
-app.use("/user", userRoute);
+app.use("/v1/api/user", userRoute);
 
 app.use((req, res, next) => {
   //   const error = new Error("Not found");
