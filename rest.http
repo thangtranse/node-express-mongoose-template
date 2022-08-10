@@ -30,4 +30,4 @@ GET http://localhost:3000/user/logout
 
 ### User get-list-account example Bear token
 GET http://localhost:3000/user/get-list-account
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMDYwNzksImV4cCI6MTY2MDEwOTY3OX0.iYBdl5RckPEKhJbXxnU2_HDAoKa3w81Un84j3L-9Y4U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTUwMDYsImV4cCI6MTY2MDExODYwNn0.YuRO3U36mNJf7-hs67WImXZ552pYbBduPpf2ysV1vOg

@@ -15,7 +15,7 @@ This is project template
 1. bcrypt
 1. jsonwebtoken
 1. crypto
-1. redis
+1. ioredis
 # Extensions Node
 
 1. [redis-commander](https://www.npmjs.com/package/redis-commander)
