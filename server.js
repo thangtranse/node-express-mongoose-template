@@ -1,10 +1,20 @@
-const express = require("express");
-const app = express();
-const userRoute = require("./routes/user.route");
-
 require("dotenv").config();
 
+const express = require("express");
+const app = express();
+
+const userRoute = require("./routes/user.route");
+
+// require("./helpers/connection.mongodb");
+
 const createError = require("http-errors");
+
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 app.get("/", (req, res, next) => {
   res.send("Hello World");

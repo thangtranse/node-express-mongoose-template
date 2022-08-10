@@ -6,6 +6,12 @@ GET http://localhost:3000/abc
 
 ### User
 POST http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+    "email": "thangtranse@gmail.com",
+    "password": "abcd@123"
+}
 
 ### User
 POST http://localhost:3000/user/refresh-token
