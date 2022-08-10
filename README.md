@@ -14,6 +14,7 @@ This is project template
 1. joi
 1. bcrypt
 1. jsonwebtoken
+1. crypto
 # Extensions vscode
 
 1. REST Client

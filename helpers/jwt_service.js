@@ -5,7 +5,7 @@ const signAccessToken = async (userId) => {
     const payload = {
       userId,
     };
-    const secret = "KEY SECRET";
+    const secret = process.env.ACCESS_TOKEN_SECRET;
     const option = {
       expiresIn: "1h", // 10m 10s
     };

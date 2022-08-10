@@ -71,7 +71,7 @@ route.post("/login", async (req, res, next) => {
       throw createError.Unauthorized();
     }
     const accessToken = await signAccessToken(isUser._id);
-    return res.json(accessToken);
+    return res.json({ accessToken });
   } catch (error) {
     next(error);
   }
