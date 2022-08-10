@@ -1,5 +1,8 @@
 const JWT = require("jsonwebtoken");
 const createError = require("http-errors");
+const redis = require("../datasources/connection.redis");
+
+const REDIS_KEY_DEFAULT = "jwt_access_token_";
 
 const signAccessToken = async (userId) => {
   return new Promise((resolve, reject) => {
@@ -24,11 +27,22 @@ const signRefreshToken = async (userId) => {
     };
     const secret = process.env.REFRESH_TOKEN_SECRET;
     const option = {
-      expiresIn: "1y",
+      expiresIn: "1d",
     };
     JWT.sign(payload, secret, option, (err, token) => {
       if (err) reject(err);
-      resolve(token);
+      redis.set(
+        REDIS_KEY_DEFAULT + userId.toString(),
+        token,
+        "EX",
+        24 * 60 * 60,
+        (err, data) => {
+          if (err) {
+            return reject(createError.InternalServerError());
+          }
+          return resolve(token);
+        }
+      );
     });
   });
 };
@@ -70,7 +84,16 @@ const veryfyRefreshToken = (refreshToken) => {
         if (err) {
           reject(err);
         }
-        resolve(payload);
+        const { userId } = payload;
+        redis.get(REDIS_KEY_DEFAULT + userId, (err, reply) => {
+          if (err) {
+            return reject(createError.InternalServerError());
+          }
+          if (refreshToken === reply) {
+            return resolve(payload);
+          }
+          return reject(createError.Unauthorized());
+        });
       }
     );
   });

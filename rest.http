@@ -18,7 +18,7 @@ POST http://localhost:3000/user/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTU5NDcsImV4cCI6MTY5MTY3MzU0N30.fZuu4ee9VMZdFA35Rjs2BpltHK4eSHeaD1T-wj7yeUw"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTY4MDUsImV4cCI6MTY2MDIwMzIwNX0.084zokdOyKP5dqcJv-D3ABMjQq60G-YOhpIGW7vA9C4"
 }
 
 ### User Login
@@ -35,4 +35,4 @@ GET http://localhost:3000/user/logout
 
 ### User get-list-account example Bear token
 GET http://localhost:3000/user/get-list-account
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTU5NDcsImV4cCI6MTY2MDExNTk3N30.3ty9lOwjDNaKpTERk5mpPf3RGwC5bNvtCojyPCOImLg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTY4NjAsImV4cCI6MTY2MDExNjg5MH0.Z0EpiVG4Jp1S_1hHd4gSdCtKJ7QZz8NQfX70KlSoWAE
