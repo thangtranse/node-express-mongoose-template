@@ -3,10 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const userRoute = require("./routes/user.route");
+const userRoute = require("./src/routes/user.route");
 
 // require("./helpers/connection.mongodb");
-require("./datasources/connection.redis");
+require("./src/datasources/connection.redis");
 
 const createError = require("http-errors");
 

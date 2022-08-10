@@ -100,6 +100,7 @@ const veryfyRefreshToken = (refreshToken) => {
 };
 
 module.exports = {
+  REDIS_KEY_DEFAULT,
   signAccessToken,
   signRefreshToken,
   veryfyAccessToken,

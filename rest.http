@@ -13,12 +13,12 @@ Content-Type: application/json
     "password": "abcd@123"
 }
 
-### User
+### User Refresh Token
 POST http://localhost:3000/user/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTY4MDUsImV4cCI6MTY2MDIwMzIwNX0.084zokdOyKP5dqcJv-D3ABMjQq60G-YOhpIGW7vA9C4"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTc3NjEsImV4cCI6MTY2MDIwNDE2MX0.QozBmVrjhcDCKglmenmz0mpQ-4nfgXL1Xbz95nZp49I"
 }
 
 ### User Login
@@ -30,9 +30,15 @@ Content-Type: application/json
     "password": "abcd@123"
 }
 
-### User
-GET http://localhost:3000/user/logout
+### User Logout
+DELETE http://localhost:3000/user/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTc3OTIsImV4cCI6MTY2MDIwNDE5Mn0.fYbFijG0Eeby9zMIrwouWZXQwKtCfRJVA2B_5apT4HQ"
+}
 
 ### User get-list-account example Bear token
 GET http://localhost:3000/user/get-list-account
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTY4NjAsImV4cCI6MTY2MDExNjg5MH0.Z0EpiVG4Jp1S_1hHd4gSdCtKJ7QZz8NQfX70KlSoWAE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTc3NjEsImV4cCI6MTY2MDExNzc5MX0.ckQCxnzHTmkj_4Mt55onOP4Rl1l1xCgab1N9LW6dFWs
+
