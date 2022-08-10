@@ -5,6 +5,7 @@ const createError = require("http-errors");
 const { userValidate } = require("../helpers/validation");
 const {
   signAccessToken,
+  signRefreshToken,
   veryfyAccessToken,
 } = require("../helpers/jwt_service");
 
@@ -59,7 +60,6 @@ route.post("/login", async (req, res, next) => {
   try {
     const { error } = userValidate(res.body);
     const { email, password } = req.body;
-
     if (error) {
       throw createError(error.details[0].message);
     }
@@ -74,7 +74,8 @@ route.post("/login", async (req, res, next) => {
       throw createError.Unauthorized();
     }
     const accessToken = await signAccessToken(isUser._id);
-    return res.json({ accessToken });
+    const refreshToken = await signRefreshToken(isUser._id);
+    return res.json({ accessToken, refreshToken });
   } catch (error) {
     next(error);
   }

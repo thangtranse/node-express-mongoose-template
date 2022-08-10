@@ -6,6 +6,7 @@ const app = express();
 const userRoute = require("./routes/user.route");
 
 // require("./helpers/connection.mongodb");
+require("./datasources/connection.redis");
 
 const createError = require("http-errors");
 

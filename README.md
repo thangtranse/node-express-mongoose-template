@@ -15,6 +15,10 @@ This is project template
 1. bcrypt
 1. jsonwebtoken
 1. crypto
+1. redis
+# Extensions Node
+
+1. [redis-commander](https://www.npmjs.com/package/redis-commander)
 # Extensions vscode
 
 1. REST Client
