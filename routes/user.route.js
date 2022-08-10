@@ -1,15 +1,21 @@
 const express = require("express");
 const route = express.Router();
 const createError = require("http-errors");
+const { userValidate } = require("../helpers/validation");
 
 const UserModel = require("../models/user.model");
 
 route.post("/register", async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
-      throw createError.BadRequest();
+    const { error } = userValidate(req.body);
+    if (error) {
+      console.log(`Error:: ${error}`);
+      throw createError(error.details[0].message);
     }
+    // if (!email || !password) {
+    //   throw createError.BadRequest();
+    // }
     const isExits = await UserModel.findOne({
       username: email,
     });
