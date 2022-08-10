@@ -7,8 +7,9 @@ const UserModel = require("../models/user.model");
 
 route.post("/register", async (req, res, next) => {
   try {
-    const { email, password } = req.body;
     const { error } = userValidate(req.body);
+    const { email, password } = req.body;
+    
     if (error) {
       console.log(`Error:: ${error}`);
       throw createError(error.details[0].message);
@@ -49,8 +50,28 @@ route.post("/refresh-token", (req, res, next) => {
   res.send("Post refresh token");
 });
 
-route.post("/login", (req, res, next) => {
-  res.send("Post Login");
+route.post("/login", async (req, res, next) => {
+  try {
+    const { error } = userValidate(res.body);
+    const { email, password } = req.body;
+
+    if (error) {
+      throw createError(error.details[0].message);
+    }
+    const isUser = await UserModel.findOne({
+      username: email,
+    });
+    if (!isUser) {
+      throw createError.NotFound("User not registered");
+    }
+    const isValid = await isUser.isCheckPassword(password);
+    if (!isValid) {
+      throw createError.Unauthorized();
+    }
+    return res.send(isUser);
+  } catch (error) {
+    next(error);
+  }
 });
 
 route.get("/logout", (req, res, next) => {

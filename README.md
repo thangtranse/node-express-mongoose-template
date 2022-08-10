@@ -12,7 +12,7 @@ This is project template
 1. http-errors
 1. nodemon
 1. joi
-1. 
+1. bcrypt
 # Extensions vscode
 
 1. REST Client

@@ -4,20 +4,26 @@ GET http://localhost:3000
 ###
 GET http://localhost:3000/abc
 
-### User
+### User Register
 POST http://localhost:3000/user/register
 Content-Type: application/json
 
 {
-    "email": "thang.transe@gmail.com",
+    "email": "thang.tran.s.e@gmail.com",
     "password": "abcd@123"
 }
 
 ### User
 POST http://localhost:3000/user/refresh-token
 
-### User
+### User Login
 POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email": "thang.tran.s.e@gmail.com",
+    "password": "abcd@123"
+}
 
 ### User
 GET http://localhost:3000/user/logout
