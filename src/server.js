@@ -20,6 +20,7 @@ app.use(
   })
 );
 
+const logEvents = require("./helpers/logs_events");
 const userRoute = require("./routes/user.route");
 // require("./helpers/connection.mongodb");
 require("./datasources/connection.redis");
@@ -38,14 +39,21 @@ app.get("/", (req, res, next) => {
 });
 app.use("/v1/api/user", userRoute);
 
-app.use((req, res, next) => {
-  //   const error = new Error("Not found");
-  //   error.status = 500;
-  //   next(error);
-  next(createError.NotFound("Page not found!"));
+app.get("/*", (req, res, next) => {
+  next(createError.NotFound());
+});
+app.post("/*", (req, res, next) => {
+  next(createError.NotFound());
 });
 
 app.use((err, req, res, next) => {
+  logEvents({
+    url: req.url,
+    method: req.method,
+    headers: req.headers,
+    body: req.body,
+    msg: err.message,
+  });
   res.json({
     status: err.status || 500,
     message: err.message,

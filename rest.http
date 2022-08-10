@@ -8,7 +8,7 @@ GET http://localhost:3000/abc
 GET http://localhost:3000/v1/api/user/test-error-api
 
 ### User Register
-POST http://localhost:3000/user/register
+POST http://localhost:3000/v1/api/user/register
 Content-Type: application/json
 
 {
