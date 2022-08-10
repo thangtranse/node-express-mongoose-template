@@ -4,19 +4,17 @@ const express = require("express");
 const helmet = require("helmet");
 const helmetConfig = require("./configs/helmet.config");
 const app = express();
+
 app.use(
   helmet({
+    ...helmetConfig.default,
     contentSecurityPolicy: {
+      ...helmetConfig.default.contentSecurityPolicy,
       directives: {
+        ...helmetConfig.default.contentSecurityPolicy.directives,
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "script-src": helmetConfig.whiteList,
-        "img-src": ["'self'", "https: data: blob:"],
-        "connect-src": helmetConfig.whiteList,
       },
     },
-    crossOriginEmbedderPolicy: true,
-    crossOriginOpenerPolicy: true,
-    crossOriginResourcePolicy: true,
   })
 );
 
