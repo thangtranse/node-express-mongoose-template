@@ -1,12 +1,29 @@
 require("dotenv").config();
 
 const express = require("express");
+const helmet = require("helmet");
+const helmetConfig = require("./configs/helmet.config");
 const app = express();
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "script-src": helmetConfig.whiteList,
+        "img-src": ["'self'", "https: data: blob:"],
+        "connect-src": helmetConfig.whiteList,
+      },
+    },
+    crossOriginEmbedderPolicy: true,
+    crossOriginOpenerPolicy: true,
+    crossOriginResourcePolicy: true,
+  })
+);
 
-const userRoute = require("./src/routes/user.route");
+const userRoute = require("./routes/user.route");
 
 // require("./helpers/connection.mongodb");
-require("./src/datasources/connection.redis");
+require("./datasources/connection.redis");
 
 const createError = require("http-errors");
 

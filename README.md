@@ -16,6 +16,7 @@ This is project template
 1. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 1. crypto
 1. [ioredis](https://www.npmjs.com/package/ioredis)
+1. [helmet](https://www.npmjs.com/package/helmet)
 # Extensions Node
 
 1. [redis-commander](https://www.npmjs.com/package/redis-commander)
