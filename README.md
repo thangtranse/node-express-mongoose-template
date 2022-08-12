@@ -4,6 +4,11 @@
 
 This is project template use expressJS, mongodb, Redis. It was full example for api user login, logout, refesh token.
 
+# REQ
+
+1. Nodejs (upto v14.18.1)
+1. Redis (i use v6.2.6)
+1. MongoDb (i use v5.0.10)
 # ENV
 
 ```sh
@@ -14,6 +19,11 @@ REDIS_PORT=6379
 REDIS_HOST=
 ACCESS_TOKEN_SECRET=
 REFRESH_TOKEN_SECRET=
+```
+To get `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET` when you run `bash` below, you can get other key for 2 varials.
+
+```sh
+node ./src/helpers/generate_key.js 
 ```
 
 # Package
