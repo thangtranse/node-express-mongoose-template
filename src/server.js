@@ -1,11 +1,17 @@
 require("dotenv").config();
 
 const express = require("express");
-const helmet = require("helmet");
+const compression = require('compression')
 const morgan = require("morgan");
+const cors = require('cors');
+const helmet = require("helmet");
 const helmetConfig = require("./configs/helmet.config");
+const corsConfig = require("./configs/cors.config");
+
 const app = express();
 
+app.use(cors(corsConfig));
+app.use(compression())
 app.use(morgan("common"));
 app.use(
   helmet({
@@ -22,7 +28,8 @@ app.use(
 
 const logEvents = require("./helpers/logs_events");
 const userRoute = require("./routes/user.route");
-// require("./helpers/connection.mongodb");
+
+require("./datasources/connection.mongodb");
 require("./datasources/connection.redis");
 
 const createError = require("http-errors");

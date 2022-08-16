@@ -41,6 +41,8 @@ node ./src/helpers/generate_key.js
 1. [helmet](https://www.npmjs.com/package/helmet)
 1. [morgan](https://www.npmjs.com/package/morgan)
 1. [date-fns](https://www.npmjs.com/package/date-fns)
+1. [compression](https://www.npmjs.com/package/compression): 
+1. [cors](): 
 
 # Extensions Node
 
