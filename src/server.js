@@ -1,9 +1,9 @@
 require("dotenv").config();
 
 const express = require("express");
-const compression = require('compression')
+const compression = require("compression");
 const morgan = require("morgan");
-const cors = require('cors');
+const cors = require("cors");
 const helmet = require("helmet");
 const helmetConfig = require("./configs/helmet.config");
 const corsConfig = require("./configs/cors.config");
@@ -11,7 +11,7 @@ const corsConfig = require("./configs/cors.config");
 const app = express();
 
 app.use(cors(corsConfig));
-app.use(compression())
+app.use(compression());
 app.use(morgan("common"));
 app.use(
   helmet({
@@ -27,7 +27,9 @@ app.use(
 );
 
 const logEvents = require("./helpers/logs_events");
+// ROUTER
 const userRoute = require("./routes/user.route");
+const sseRoute = require("./routes/sse.route");
 
 require("./datasources/connection.mongodb");
 require("./datasources/connection.redis");
@@ -45,6 +47,7 @@ app.get("/", (req, res, next) => {
   res.send("Hello World");
 });
 app.use("/v1/api/user", userRoute);
+app.use("/sse", sseRoute);
 
 app.get("/*", (req, res, next) => {
   next(createError.NotFound());

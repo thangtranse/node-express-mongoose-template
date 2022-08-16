@@ -44,3 +44,17 @@ Content-Type: application/json
 ### User get-list-account example Bear token
 GET http://localhost:3000/v1/api/user/get-list-account
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTc3NjEsImV4cCI6MTY2MDExNzc5MX0.ckQCxnzHTmkj_4Mt55onOP4Rl1l1xCgab1N9LW6dFWs
+
+### SSE Status
+GET http://localhost:3000/sse/status
+Content-Type: application/json
+
+### SSE Status
+GET http://localhost:3000/sse/events
+Accept: text/event-stream
+
+### SSE Status
+POST http://localhost:3000/sse/facts
+Content-Type: application/json
+
+{"info": "Shark teeth are embedded in the gums rather than directly affixed to the jaw, and are constantly replaced throughout life.", "source": "https://en.wikipedia.org/wiki/Shark"}
