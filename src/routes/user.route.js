@@ -17,9 +17,6 @@ route.get(
   userController.getListAccount
 );
 
-route.get(
-  "/test-error-api",
-  userController.testErrorApi
-);
+route.get("/test-error-api", userController.testErrorApi);
 
 module.exports = route;

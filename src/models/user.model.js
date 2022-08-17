@@ -2,21 +2,34 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const dbConnected = require("../datasources/connection.mongodb");
+const rolesModel = require("./role.model");
 // const { testConnection } = require("../helpers/connection.multi.mongodb");
 const bcrypt = require("bcrypt");
+const CONFIG = require("../configs/database.config");
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    lowercase: true,
-    unquie: true,
-    required: true,
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      lowercase: true,
+      unquie: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    roles: [
+      {
+        type: String,
+        required: true,
+        lowercase: true,
+        default: CONFIG.roles.scopeDefault,
+      },
+    ],
   },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 // module.exports = {
 //   userTestModel: testConnection.model("user", userSchema),
@@ -32,6 +45,11 @@ userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(this.password, salt);
     this.password = hashPassword;
+    const listRoles = await rolesModel.find({}, { name: true });
+    console.log('listRoles', listRoles)
+    if (this.roles.length > 0) {
+      this.roles = this.roles.map(data => listRoles.indexOf(data) !== -1 ? data : '')
+    }
     next();
   } catch (error) {
     next(error);
