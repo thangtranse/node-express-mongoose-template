@@ -9,6 +9,7 @@ This is project template use expressJS, mongodb, Redis. It was full example for 
 1. Nodejs (upto v14.18.1)
 1. Redis (i use v6.2.6)
 1. MongoDb (i use v5.0.10)
+
 # ENV
 
 ```sh
@@ -20,10 +21,11 @@ REDIS_HOST=
 ACCESS_TOKEN_SECRET=
 REFRESH_TOKEN_SECRET=
 ```
+
 To get `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET` when you run `bash` below, you can get other key for 2 varials.
 
 ```sh
-node ./src/helpers/generate_key.js 
+node ./src/helpers/generate_key.js
 ```
 
 # Package
@@ -41,8 +43,8 @@ node ./src/helpers/generate_key.js
 1. [helmet](https://www.npmjs.com/package/helmet)
 1. [morgan](https://www.npmjs.com/package/morgan)
 1. [date-fns](https://www.npmjs.com/package/date-fns)
-1. [compression](https://www.npmjs.com/package/compression): 
-1. [cors](): 
+1. [compression](https://www.npmjs.com/package/compression):
+1. [cors]():
 
 # Extensions Node
 
@@ -66,8 +68,19 @@ node ./src/helpers/generate_key.js
    - Publisher: Wix
    - VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost
 
+# Server-sent-events (SSE)
+
+[Go to branch](thangtranse/node-express-mongoose-template/tree/server-sent-events)
+
+## 1. Intro
+
+## 2. REF - Blog
+
+1. https://www.digitalocean.com/community/tutorials/nodejs-server-sent-events-build-realtime-app
+
 # REF
 
 ## Blog
+
 1. https://www.youtube.com/c/TipsJavascript
 1. https://anonystick.com/

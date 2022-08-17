@@ -50,8 +50,10 @@ GET http://localhost:3000/sse/status
 Content-Type: application/json
 
 ### SSE Status
-GET http://localhost:3000/sse/events
+GET http://localhost:3000/sse/events?userId=minhthang7979
 Accept: text/event-stream
+
+// curl -H Accept:text/event-stream http://localhost:3000/sse/events?userId=minhthang7979
 
 ### SSE Status
 POST http://localhost:3000/sse/facts
