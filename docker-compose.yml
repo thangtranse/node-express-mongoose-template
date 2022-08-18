@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  node:
+    build: .
+    restart: on-failure
+    volumes:
+      - ./:/code
+    ports:
+      - 4000:4000
+    environment:
+      - PORT=4000
+      - MONGO_URL_CONNECT_1=mongodb://root:password123@localhost:27017/test?authSource=admin
+      - REDIS_PORT=6379
+      - REDIS_HOST=localhost
+      - ACCESS_TOKEN_SECRET=b1a36cccc3c14ba4c1da1a9a6921f7bfc4aafb1e99e7bcdcfaa6c0a02baa4e3691c4309bf1
+      - REFRESH_TOKEN_SECRET=1f2adf7da8ab7e3275d4276ab0702709bc02b50127b61dec271c34e5275c9c5b6394ce7d4a
