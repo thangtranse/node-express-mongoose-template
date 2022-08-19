@@ -28,6 +28,7 @@ app.use(
 
 const logEvents = require("./helpers/logs_events");
 const userRoute = require("./routes/user.route");
+const healthRoute = require("./routes/health.route");
 
 require("./datasources/connection.mongodb");
 require("./datasources/connection.redis");
@@ -45,6 +46,7 @@ app.get("/", (req, res, next) => {
   res.send("Hello World");
 });
 app.use("/v1/api/user", userRoute);
+app.use("/v1/api/health", healthRoute);
 
 app.get("/*", (req, res, next) => {
   next(createError.NotFound());
