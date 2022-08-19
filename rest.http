@@ -5,14 +5,14 @@ GET http://localhost:3000
 GET http://localhost:3000/abc
 
 ### User check error
-GET http://localhost:3000/v1/api/user/test-error-api
+GET http://localhost:3000/v1/api/user/test/error-api
 
 ### User Register
 POST http://localhost:3000/v1/api/user/register
 Content-Type: application/json
 
 {
-    "email": "thang.tran.s.e@gmail.com",
+    "email": "minhthang.3596.3@gmail.com",
     "password": "abcd@123"
 }
 
@@ -29,7 +29,7 @@ POST http://localhost:3000/v1/api/user/login
 Content-Type: application/json
 
 {
-    "email": "thang.tran.s.e@gmail.com",
+    "email": "minhthang.3596.3@gmail.com",
     "password": "abcd@123"
 }
 
@@ -47,4 +47,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzM
 
 ### User get-list-account example Bear token
 GET http://localhost:3000/v1/api/health/inital-data
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmY3NmNlMTkxOTZmZDRjOWEwYTY1OTgiLCJpYXQiOjE2NjA4NzYyNDIsImV4cCI6MTY2MDg3NjI3Mn0.mP5JtAfd-IN0iJS9HTheCIlc84IruQbJ3ccoIDEOLmU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmZlZmZjZmRiMDNiNDY0NjU5M2Q3NGUiLCJpYXQiOjE2NjA4ODI5NjcsImV4cCI6MTY2MDg4Mjk5N30._WLXZuK3Z5hx1A0SuTk8s4OSJUcoT9IZKjxVMHgd7ck
+
+### User Admin
+GET http://localhost:3000/v1/api/user/test/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmZlZmZjZmRiMDNiNDY0NjU5M2Q3NGUiLCJpYXQiOjE2NjA4ODMwODMsImV4cCI6MTY2MDg4MzExM30.O0Buof2HYt6e1ULEQrjUbwDzsF7MTvRNCeQFcLJ2yfU
+
+### User 
+GET http://localhost:3000/v1/api/user/test/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmZlZmZjZmRiMDNiNDY0NjU5M2Q3NGUiLCJpYXQiOjE2NjA4ODMwODMsImV4cCI6MTY2MDg4MzExM30.O0Buof2HYt6e1ULEQrjUbwDzsF7MTvRNCeQFcLJ2yfU

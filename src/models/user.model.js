@@ -22,9 +22,7 @@ const userSchema = new Schema(
     roles: [
       {
         type: String,
-        required: true,
         lowercase: true,
-        default: CONFIG.roles.scopeDefault,
       },
     ],
   },
@@ -45,10 +43,17 @@ userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(this.password, salt);
     this.password = hashPassword;
-    const listRoles = await rolesModel.find({}, { name: true });
-    console.log('listRoles', listRoles)
+    let listRoles = await rolesModel.find({}, { name: true });
+    listRoles = listRoles.map((x) => x.name);
     if (this.roles.length > 0) {
-      this.roles = this.roles.map(data => listRoles.indexOf(data) !== -1 ? data : '')
+      const isRoles = this.roles.map((data) =>
+        listRoles.indexOf(data) !== -1 ? data : ""
+      );
+      if (isRoles !== "") {
+        this.roles = isRoles;
+      } else {
+        throw "Roles is error";
+      }
     }
     next();
   } catch (error) {

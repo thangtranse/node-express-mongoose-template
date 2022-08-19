@@ -21,9 +21,11 @@ module.exports = {
         console.log(`Error:: ${error}`);
         throw createError(error.details[0].message);
       }
+
       // if (!email || !password) {
       //   throw createError.BadRequest();
       // }
+      
       const isExits = await UserModel.findOne({
         username: email,
       });
@@ -40,6 +42,7 @@ module.exports = {
       const user = await UserModel({
         username: email,
         password: password,
+        roles: ['user']
       });
 
       const saveUser = await user.save();

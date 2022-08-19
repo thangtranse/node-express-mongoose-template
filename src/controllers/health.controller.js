@@ -5,7 +5,6 @@ module.exports = {
   initalData: async (req, res, next) => {
     const session = await RoleModel.startSession();
     session.startTransaction();
-
     try {
       const opts = { session };
       for (let i = 0; i < _rolesMock.length; i++) {
@@ -16,10 +15,8 @@ module.exports = {
         );
         // await RoleModel(_rolesMock[i]).save(opts);
       }
-
       await session.commitTransaction();
       session.endSession();
-
       return res.json({
         status: true,
       });

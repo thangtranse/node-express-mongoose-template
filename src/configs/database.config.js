@@ -1,6 +1,7 @@
 module.exports = {
   roles: {
     scope: ["User", "Admin"],
-    scopeDefault: ["User"]
+    scopeDefault: "User",
+    scopeAdmin: "Admin",
   },
 };
