@@ -5,18 +5,21 @@ const dbConnected = require("../datasources/connection.mongodb");
 // const { testConnection } = require("../helpers/connection.multi.mongodb");
 const bcrypt = require("bcrypt");
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    lowercase: true,
-    unquie: true,
-    required: true,
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      lowercase: true,
+      unquie: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 // module.exports = {
 //   userTestModel: testConnection.model("user", userSchema),
