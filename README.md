@@ -55,28 +55,9 @@ node ./src/helpers/generate_key.js
 # Extensions Node
 
 1. [redis-commander](https://www.npmjs.com/package/redis-commander)
+# References
 
-# Extensions vscode
-
-1. REST Client
-
-   - Id: humao.rest-client
-   - Description: REST Client for Visual Studio Code
-   - Version: 0.25.0
-   - Publisher: Huachao Mao
-   - VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
-
-2. Import Cost
-
-   - Id: wix.vscode-import-cost
-   - Description: Display import/require package size in the editor
-   - Version: 3.3.0
-   - Publisher: Wix
-   - VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost
-
-# Nguồn tham khảo
-
-## 1. Từ nhà sản xuất
-## 2. Từ Blog
+## 1. From the manufacturer
+## 2. From Blog
 1. https://www.youtube.com/c/TipsJavascript
 1. https://anonystick.com/
