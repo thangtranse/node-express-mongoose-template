@@ -44,3 +44,5 @@ Content-Type: application/json
 ### User get-list-account example Bear token
 GET http://localhost:3000/v1/api/user/get-list-account
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTc3NjEsImV4cCI6MTY2MDExNzc5MX0.ckQCxnzHTmkj_4Mt55onOP4Rl1l1xCgab1N9LW6dFWs
+
+### User get-list-account example Bearer token
