@@ -8,3 +8,4 @@
 **/.env*
 **/.eslintcache
 **/logs/**
+**/docker/mongodb/db/**
