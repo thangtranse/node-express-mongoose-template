@@ -1,15 +1,15 @@
-const createError = require("http-errors");
+const createError = require('http-errors');
 
-const { userValidate } = require("../helpers/validation");
+const { userValidate } = require('../helpers/validation');
 const {
   signAccessToken,
   signRefreshToken,
   verifyRefreshToken,
   REDIS_KEY_DEFAULT,
-} = require("../helpers/jwt_service");
+} = require('../helpers/jwt_service');
 
-const UserModel = require("../models/user.model");
-const client = require("../databases/connection.redis");
+const UserModel = require('../models/user.model');
+const client = require('../databases/connection.redis');
 
 module.exports = {
   register: async (req, res, next) => {
@@ -18,7 +18,6 @@ module.exports = {
       const { email, password } = req.body;
 
       if (error) {
-        console.log(`Error:: ${error}`);
         throw createError(error.details[0].message);
       }
       // if (!email || !password) {
@@ -39,7 +38,7 @@ module.exports = {
 
       const user = await UserModel({
         username: email,
-        password: password,
+        password,
       });
 
       const saveUser = await user.save();
@@ -60,10 +59,10 @@ module.exports = {
       }
       const { userId } = await verifyRefreshToken(refreshToken);
       const accessToken = await signAccessToken(userId);
-      const refrToken = await signRefreshToken(userId);
+      const refToken = await signRefreshToken(userId);
       return res.json({
         accessToken,
-        refreshToken: refrToken,
+        refreshToken: refToken,
       });
     } catch (error) {
       next(error);
@@ -80,12 +79,17 @@ module.exports = {
         username: email,
       });
       if (!isUser) {
-        throw createError.NotFound("User not registered");
+        throw createError.NotFound('User not registered');
       }
-      const isValid = await isUser.isCheckPassword(password);
-      if (!isValid) {
-        throw createError.Unauthorized();
+      try {
+        const isValid = await isUser.isCheckPassword(password);
+        if (!isValid) {
+          throw createError.Unauthorized('Username/password not valid');
+        }
+      } catch (err) {
+        throw createError.Unauthorized(error);
       }
+
       const accessToken = await signAccessToken(isUser._id);
       const refreshToken = await signRefreshToken(isUser._id);
       return res.json({ accessToken, refreshToken });
@@ -100,13 +104,13 @@ module.exports = {
         throw createError.BadRequest();
       }
       const { userId } = await verifyRefreshToken(refreshToken);
-      client.del(REDIS_KEY_DEFAULT + userId.toString(), (err, reply) => {
+      client.del(REDIS_KEY_DEFAULT + userId.toString(), (err) => {
         if (err) {
           throw createError.InternalServerError();
         }
         res.json({
           status: true,
-          message: "Logout",
+          message: 'Logout',
         });
       });
     } catch (error) {
@@ -122,7 +126,6 @@ module.exports = {
   },
   testErrorApi: async (req, res, next) => {
     try {
-      console.log("Don't find arg", a);
       return res.json({ status: true });
     } catch (error) {
       next(error);

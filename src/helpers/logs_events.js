@@ -1,14 +1,14 @@
-const fs = require("fs");
-const path = require("path");
-const { format } = require("date-fns");
+const fs = require('fs');
+const path = require('path');
+const { format } = require('date-fns');
 
-const FILE_PATH_LOG = path.join(__dirname, "../../logs");
+const FILE_PATH_LOG = path.join(__dirname, '../../logs');
 
 if (!fs.existsSync(FILE_PATH_LOG)) {
   fs.mkdirSync(FILE_PATH_LOG);
 }
 
-const FILE_PATH_NAME = path.join(__dirname, "../../logs", "log.log");
+const FILE_PATH_NAME = path.join(__dirname, '../../logs', 'log.log');
 
 if (!fs.existsSync(FILE_PATH_NAME)) {
   fs.appendFile(
@@ -18,13 +18,14 @@ if (!fs.existsSync(FILE_PATH_NAME)) {
       if (err) {
         throw err;
       }
-      console.log("Create File Log!!!");
-    }
+    },
   );
 }
 
-const logEvents = async ({ url, method, headers, body, msg, ...props }) => {
-  const dateLog = `${format(new Date(), `dd-mm-yyyy\thh:mm:ss`)}`;
+const logEvents = async ({
+  url, method, headers, body, msg, ...props
+}) => {
+  const dateLog = `${format(new Date(), 'dd-mm-yyyy\thh:mm:ss')}`;
   const contentLog = `${dateLog}------${JSON.stringify({
     url,
     method,
@@ -33,11 +34,7 @@ const logEvents = async ({ url, method, headers, body, msg, ...props }) => {
     msg,
     ...props,
   })}\n`;
-  try {
-    fs.appendFile(FILE_PATH_NAME, contentLog);
-  } catch (error) {
-    console.log(`Error:: ${error}`);
-  }
+  fs.appendFile(FILE_PATH_NAME, contentLog);
 };
 
 module.exports = logEvents;

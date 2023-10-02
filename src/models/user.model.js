@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-const dbConnected = require("../databases/connection.mongodb");
+const bcrypt = require('bcrypt');
+const dbConnected = require('../databases/connection.mongodb');
 // const { testConnection } = require("../helpers/connection.multi.mongodb");
-const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
   {
@@ -19,7 +19,7 @@ const userSchema = new Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // module.exports = {
@@ -28,9 +28,8 @@ const userSchema = new Schema(
 // };
 
 // middleware mongo method save
-userSchema.pre("save", async function (next) {
+userSchema.pre('save', async (next) => {
   try {
-    console.log("Called before save::", this.username, this.password);
     // băm mật khẩu + với 1 chút muối!, càng nhiều muối càng khó dò mã
     // số càng cao ứng dụng chạy càng lâu
     const salt = await bcrypt.genSalt(10);
@@ -42,12 +41,6 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-userSchema.methods.isCheckPassword = async function (password) {
-  try {
-    return await bcrypt.compare(password, this.password);
-  } catch (error) {
-    next(error);
-  }
-};
+userSchema.methods.isCheckPassword = (password) => bcrypt.compare(password, this.password);
 
-module.exports = dbConnected.model("users", userSchema);
+module.exports = dbConnected.model('users', userSchema);

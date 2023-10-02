@@ -1,9 +1,9 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 const userValidate = (data) => {
   const userSchema = Joi.object({
     email: Joi.string()
-      .pattern(new RegExp("gmail.com"))
+      .pattern(/gmail.com/)
       .email()
       .lowercase()
       .required(),

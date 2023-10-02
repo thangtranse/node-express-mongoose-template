@@ -1,6 +1,7 @@
-const crypto = require("crypto");
+const crypto = require('crypto');
 
-const key_1 = crypto.randomBytes(37).toString("hex");
-const key_2 = crypto.randomBytes(37).toString("hex");
+const keyFirst = crypto.randomBytes(37).toString('hex');
+const keySecond = crypto.randomBytes(37).toString('hex');
 
-console.table({ key_1, key_2 });
+// eslint-disable-next-line no-console
+console.table({ keyFirst, keySecond });
