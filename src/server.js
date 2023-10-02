@@ -1,19 +1,19 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
-const compression = require('compression');
-const morgan = require('morgan');
-const cors = require('cors');
-const helmet = require('helmet');
-const createError = require('http-errors');
-const helmetConfig = require('./configs/helmet.config');
-const corsConfig = require('./configs/cors.config');
+const express = require("express");
+const compression = require("compression");
+const morgan = require("morgan");
+const cors = require("cors");
+const helmet = require("helmet");
+const createError = require("http-errors");
+const helmetConfig = require("./configs/helmet.config");
+const corsConfig = require("./configs/cors.config");
 
 const app = express();
 
 app.use(cors(corsConfig));
 app.use(compression());
-app.use(morgan('common'));
+app.use(morgan("common"));
 app.use(
   helmet({
     ...helmetConfig.default,
@@ -27,11 +27,11 @@ app.use(
   }),
 );
 
-const logEvents = require('./helpers/logs_events');
-const userRoute = require('./routes/user.route');
+const logEvents = require("./helpers/logs_events");
+const userRoute = require("./routes/user.route");
 
-require('./databases/connection.mongodb');
-require('./databases/connection.redis');
+require("./databases/connection.mongodb");
+require("./databases/connection.redis");
 
 app.use(express.json());
 app.use(
@@ -40,15 +40,15 @@ app.use(
   }),
 );
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
-app.use('/v1/api/user', userRoute);
+app.use("/v1/api/user", userRoute);
 
-app.get('/*', (req, res, next) => {
+app.get("/*", (req, res, next) => {
   next(createError.NotFound());
 });
-app.post('/*', (req, res, next) => {
+app.post("/*", (req, res, next) => {
   next(createError.NotFound());
 });
 

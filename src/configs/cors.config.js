@@ -1,5 +1,5 @@
 module.exports = {
-  origin: '*',
+  origin: "*",
   credentials: true,
   optionSuccessStatus: 200,
 };

@@ -1,8 +1,8 @@
 name: "Delete branch on closed PR"
-on: 
+on:
   pull_request:
     types: [closed]
-  
+
 jobs:
   delete-branch:
     runs-on: ubuntu-latest

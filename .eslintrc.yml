@@ -2,10 +2,12 @@ env:
   commonjs: true
   es2021: true
   node: true
-extends: airbnb-base
+extends:
+  - airbnb-base
+  - prettier
+plugins:
+  - prettier
 parserOptions:
   ecmaVersion: latest
-rules: {
-  consistent-return: 0,
-  no-underscore-dangle: 0
-}
+rules:
+  { prettier/prettier: error, consistent-return: 0, no-underscore-dangle: 0 }

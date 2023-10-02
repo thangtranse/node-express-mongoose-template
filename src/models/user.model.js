@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const bcrypt = require('bcrypt');
-const dbConnected = require('../databases/connection.mongodb');
+const bcrypt = require("bcrypt");
+const dbConnected = require("../databases/connection.mongodb");
 // const { testConnection } = require("../helpers/connection.multi.mongodb");
 
 const userSchema = new Schema(
@@ -28,7 +28,7 @@ const userSchema = new Schema(
 // };
 
 // middleware mongo method save
-userSchema.pre('save', async (next) => {
+userSchema.pre("save", async (next) => {
   try {
     // băm mật khẩu + với 1 chút muối!, càng nhiều muối càng khó dò mã
     // số càng cao ứng dụng chạy càng lâu
@@ -41,6 +41,7 @@ userSchema.pre('save', async (next) => {
   }
 });
 
-userSchema.methods.isCheckPassword = (password) => bcrypt.compare(password, this.password);
+userSchema.methods.isCheckPassword = (password) =>
+  bcrypt.compare(password, this.password);
 
-module.exports = dbConnected.model('users', userSchema);
+module.exports = dbConnected.model("users", userSchema);

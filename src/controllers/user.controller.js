@@ -1,15 +1,15 @@
-const createError = require('http-errors');
+const createError = require("http-errors");
 
-const { userValidate } = require('../helpers/validation');
+const { userValidate } = require("../helpers/validation");
 const {
   signAccessToken,
   signRefreshToken,
   verifyRefreshToken,
   REDIS_KEY_DEFAULT,
-} = require('../helpers/jwt_service');
+} = require("../helpers/jwt_service");
 
-const UserModel = require('../models/user.model');
-const client = require('../databases/connection.redis');
+const UserModel = require("../models/user.model");
+const client = require("../databases/connection.redis");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -79,12 +79,12 @@ module.exports = {
         username: email,
       });
       if (!isUser) {
-        throw createError.NotFound('User not registered');
+        throw createError.NotFound("User not registered");
       }
       try {
         const isValid = await isUser.isCheckPassword(password);
         if (!isValid) {
-          throw createError.Unauthorized('Username/password not valid');
+          throw createError.Unauthorized("Username/password not valid");
         }
       } catch (err) {
         throw createError.Unauthorized(error);
@@ -110,7 +110,7 @@ module.exports = {
         }
         res.json({
           status: true,
-          message: 'Logout',
+          message: "Logout",
         });
       });
     } catch (error) {
