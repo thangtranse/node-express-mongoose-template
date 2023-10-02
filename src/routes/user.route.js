@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const { veryfyAccessToken } = require("../helpers/jwt_service");
+const { verifyAccessToken } = require("../helpers/jwt_service");
 const userController = require("../controllers/user.controller");
 
 route.post("/register", userController.register);
@@ -13,7 +13,7 @@ route.delete("/logout", userController.logout);
 
 route.get(
   "/get-list-account",
-  veryfyAccessToken,
+  verifyAccessToken,
   userController.getListAccount
 );
 

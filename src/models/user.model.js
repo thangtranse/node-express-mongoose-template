@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
 
-const dbConnected = require("../datasources/connection.mongodb");
+const dbConnected = require("../databases/connection.mongodb");
 // const { testConnection } = require("../helpers/connection.multi.mongodb");
 const bcrypt = require("bcrypt");
 

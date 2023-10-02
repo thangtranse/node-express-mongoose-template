@@ -9,7 +9,7 @@ const {
 } = require("../helpers/jwt_service");
 
 const UserModel = require("../models/user.model");
-const client = require("../datasources/connection.redis");
+const client = require("../databases/connection.redis");
 
 module.exports = {
   register: async (req, res, next) => {

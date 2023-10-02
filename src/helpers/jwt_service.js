@@ -1,6 +1,6 @@
 const JWT = require("jsonwebtoken");
 const createError = require("http-errors");
-const redis = require("../datasources/connection.redis");
+const redis = require("../databases/connection.redis");
 
 const REDIS_KEY_DEFAULT = "jwt_access_token_";
 
@@ -47,7 +47,7 @@ const signRefreshToken = async (userId) => {
   });
 };
 
-const veryfyAccessToken = (req, res, next) => {
+const verifyAccessToken = (req, res, next) => {
   if (!req.headers["authorization"]) {
     return next(createError.Unauthorized());
   }
@@ -103,6 +103,6 @@ module.exports = {
   REDIS_KEY_DEFAULT,
   signAccessToken,
   signRefreshToken,
-  veryfyAccessToken,
+  verifyAccessToken,
   veryfyRefreshToken,
 };
