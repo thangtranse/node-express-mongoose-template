@@ -4,7 +4,7 @@ const { userValidate } = require("../helpers/validation");
 const {
   signAccessToken,
   signRefreshToken,
-  veryfyRefreshToken,
+  verifyRefreshToken,
   REDIS_KEY_DEFAULT,
 } = require("../helpers/jwt_service");
 
@@ -58,7 +58,7 @@ module.exports = {
       if (!refreshToken) {
         throw createError.BadRequest();
       }
-      const { userId } = await veryfyRefreshToken(refreshToken);
+      const { userId } = await verifyRefreshToken(refreshToken);
       const accessToken = await signAccessToken(userId);
       const refrToken = await signRefreshToken(userId);
       return res.json({
@@ -99,7 +99,7 @@ module.exports = {
       if (!refreshToken) {
         throw createError.BadRequest();
       }
-      const { userId } = await veryfyRefreshToken(refreshToken);
+      const { userId } = await verifyRefreshToken(refreshToken);
       client.del(REDIS_KEY_DEFAULT + userId.toString(), (err, reply) => {
         if (err) {
           throw createError.InternalServerError();

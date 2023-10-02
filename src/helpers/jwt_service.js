@@ -75,7 +75,7 @@ const verifyAccessToken = (req, res, next) => {
   });
 };
 
-const veryfyRefreshToken = (refreshToken) => {
+const verifyRefreshToken = (refreshToken) => {
   return new Promise((resolve, reject) => {
     JWT.verify(
       refreshToken,
@@ -104,5 +104,5 @@ module.exports = {
   signAccessToken,
   signRefreshToken,
   verifyAccessToken,
-  veryfyRefreshToken,
+  verifyRefreshToken,
 };
