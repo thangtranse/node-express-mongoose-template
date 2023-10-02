@@ -4,8 +4,8 @@ const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
 const cors = require("cors");
+
 const helmet = require("helmet");
-const createError = require("http-errors");
 const helmetConfig = require("./configs/helmet.config");
 const corsConfig = require("./configs/cors.config");
 
@@ -28,7 +28,6 @@ app.use(
 );
 
 const logEvents = require("./helpers/logs_events");
-const userRoute = require("./routes/user.route");
 
 require("./databases/connection.mongodb");
 require("./databases/connection.redis");
@@ -39,19 +38,6 @@ app.use(
     extended: true,
   }),
 );
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-app.use("/v1/api/user", userRoute);
-
-app.get("/*", (req, res, next) => {
-  next(createError.NotFound());
-});
-app.post("/*", (req, res, next) => {
-  next(createError.NotFound());
-});
-
 app.use((err, req, res) => {
   logEvents({
     url: req.url,
@@ -65,6 +51,8 @@ app.use((err, req, res) => {
     message: err.message,
   });
 });
+
+require("./routes/index")(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
