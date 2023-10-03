@@ -12,7 +12,7 @@ POST http://localhost:7777/v1/api/user/register
 Content-Type: application/json
 
 {
-    "email": "thang.tran.s.e@gmail.com",
+    "email": "thang.tran.s.e4@gmail.com",
     "password": "abcd@123"
 }
 

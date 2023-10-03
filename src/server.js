@@ -45,7 +45,7 @@ app.use(
 // Routes
 require("./routes/index")(app);
 
-app.use((err, req, res) => {
+app.use((err, req, res, _next) => {
   logEvents({
     url: req.url,
     method: req.method,
