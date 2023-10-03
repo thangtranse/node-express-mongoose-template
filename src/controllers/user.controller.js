@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 
+const e = require("express");
 const { userValidate } = require("../helpers/validation");
 const {
   signAccessToken,
@@ -20,12 +21,15 @@ module.exports = {
       if (error) {
         throw createError(error.details[0].message);
       }
+
       // if (!email || !password) {
       //   throw createError.BadRequest();
       // }
+
       const isExits = await UserModel.findOne({
         username: email,
       });
+
       if (isExits) {
         throw createError.Conflict(`${email} is ready been register`);
       }
@@ -36,7 +40,7 @@ module.exports = {
       //   password: password,
       // });
 
-      const user = await UserModel({
+      const user = new UserModel({
         username: email,
         password,
       });

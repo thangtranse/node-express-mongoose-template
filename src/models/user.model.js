@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
@@ -11,7 +12,7 @@ const userSchema = new Schema(
     username: {
       type: String,
       lowercase: true,
-      unquie: true,
+      unique: true,
       required: true,
     },
     password: {
@@ -28,9 +29,9 @@ const userSchema = new Schema(
 // };
 
 // middleware mongo method save
-userSchema.pre("save", async (next) => {
+userSchema.pre("save", async function (next, _options) {
   try {
-    // băm mật khẩu + với 1 chút muối!, càng nhiều muối càng khó dò mã
+    // băm mật khẩu + với 1 chút muối!, càng nhiều salt càng khó dò mã
     // số càng cao ứng dụng chạy càng lâu
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(this.password, salt);
