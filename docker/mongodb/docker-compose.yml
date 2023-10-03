@@ -1,51 +1,35 @@
-#
+# ---------------------------------------------
 # https://github.com/thangtranse/mongo
+# https://hub.docker.com/_/mongo
 #
+# Use root/example as user/password credentials
+# ---------------------------------------------
+version: '3.8'
 
-version: "2"
 services:
-  mongodb-primary:
-    image: "bitnami/mongodb:5.0.10"
-    container_name: mongo_mongodb-primary_1
-    restart: on-failure
+
+  mongo:
+    image: mongo:7.0.2-jammy
+    restart: always
     ports:
       - 27017:27017
-    environment:
-      - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
-      - MONGODB_REPLICA_SET_MODE=primary
-      - MONGODB_ROOT_PASSWORD=password123
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
     volumes:
-      - "./db/mongodb_master_data:/bitnami"
-
-  mongodb-secondary:
-    image: "bitnami/mongodb:5.0.10"
-    container_name: mongo_mongodb-secondary_1
-    restart: on-failure
-    depends_on:
-      - mongodb-primary
+      - ./db:/data/db
     environment:
-      - MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary
-      - MONGODB_REPLICA_SET_MODE=secondary
-      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
-      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password123
 
-  mongodb-arbiter:
-    image: "bitnami/mongodb:5.0.10"
-    container_name: mongo_mongodb-arbiter_1
-    restart: on-failure
-    depends_on:
-      - mongodb-primary
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
     environment:
-      - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
-      - MONGODB_REPLICA_SET_MODE=arbiter
-      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
-      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+      ME_CONFIG_MONGODB_AUTH_USERNAME: root
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: password123
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password123
+      ME_CONFIG_MONGODB_URL: mongodb://root:password123@mongo:27017/
 
 volumes:
-  mongodb_master_data:
-    driver: local
+  db:

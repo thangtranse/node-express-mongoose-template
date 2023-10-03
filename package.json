@@ -9,6 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/server.js",
     "start:dev": "nodemon ./src/server.js",
+    "token": "node ./src/helpers/generate_key.js",
     "mongodb:enable": "cd ./docker/mongodb && chmod +x ./enable-mongodb.sh && ./enable-mongodb.sh",
     "mongodb:remove": "cd ./docker/mongodb && chmod +x ./stop-mongodb.sh && ./stop-mongodb.sh"
   },

@@ -4,8 +4,8 @@ const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
 const cors = require("cors");
-
 const helmet = require("helmet");
+
 const helmetConfig = require("./configs/helmet.config");
 const corsConfig = require("./configs/cors.config");
 
@@ -24,20 +24,26 @@ app.use(
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
       },
     },
-  }),
+  })
 );
 
 const logEvents = require("./helpers/logs_events");
 
+// Mongodb
 require("./databases/connection.mongodb");
+// require("./databases/connection.multi.mongodb");
+
+// Redis
 require("./databases/connection.redis");
 
 app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
-  }),
+  })
 );
+// Routes
+require("./routes/index")(app);
 app.use((err, req, res) => {
   logEvents({
     url: req.url,
@@ -46,13 +52,12 @@ app.use((err, req, res) => {
     body: req.body,
     msg: err.message,
   });
+
   res.json({
     status: err.status || 500,
     message: err.message,
   });
 });
-
-require("./routes/index")(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

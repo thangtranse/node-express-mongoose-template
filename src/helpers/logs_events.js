@@ -18,7 +18,7 @@ if (!fs.existsSync(FILE_PATH_NAME)) {
       if (err) {
         throw err;
       }
-    },
+    }
   );
 }
 
@@ -32,6 +32,7 @@ const logEvents = async ({ url, method, headers, body, msg, ...props }) => {
     msg,
     ...props,
   })}\n`;
+
   fs.appendFile(FILE_PATH_NAME, contentLog);
 };
 
