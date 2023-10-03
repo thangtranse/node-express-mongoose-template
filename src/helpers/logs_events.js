@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+
 const { format } = require("date-fns");
 
 const FILE_PATH_LOG = path.join(__dirname, "../../logs");
@@ -23,8 +24,8 @@ if (!fs.existsSync(FILE_PATH_NAME)) {
 }
 
 const logEvents = async ({ url, method, headers, body, msg, ...props }) => {
-  const dateLog = `${format(new Date(), "dd-mm-yyyy\thh:mm:ss")}`;
-  const contentLog = `${dateLog}------${JSON.stringify({
+  const dateLog = `${format(new Date(), "dd-mm-yyyy--hh:mm:ss")}`;
+  const contentLog = `${dateLog}--${JSON.stringify({
     url,
     method,
     headers,
@@ -32,8 +33,12 @@ const logEvents = async ({ url, method, headers, body, msg, ...props }) => {
     msg,
     ...props,
   })}\n`;
-
-  fs.appendFile(FILE_PATH_NAME, contentLog);
+  try {
+    await fs.appendFileSync(FILE_PATH_NAME, contentLog);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log("error", error);
+  }
 };
 
 module.exports = logEvents;
