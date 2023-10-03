@@ -16,7 +16,7 @@ route.delete("/logout", userController.logout);
 route.get(
   "/get-list-account",
   verifyAccessToken,
-  userController.getListAccount,
+  userController.getListAccount
 );
 
 route.get("/test-error-api", userController.testErrorApi);

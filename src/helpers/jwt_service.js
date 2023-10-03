@@ -40,7 +40,7 @@ const signRefreshToken = async (userId) =>
             return reject(createError.InternalServerError());
           }
           return resolve(token);
-        },
+        }
       );
     });
   });
@@ -92,7 +92,7 @@ const verifyRefreshToken = (refreshToken) =>
           }
           return reject(createError.Unauthorized());
         });
-      },
+      }
     );
   });
 

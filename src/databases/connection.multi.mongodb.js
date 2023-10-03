@@ -25,7 +25,7 @@ function newConnection(uri) {
 
 const testConnection = newConnection(process.env.MONGO_URL_CONNECT_1);
 const usersDbConnection = newConnection(
-  process.env.MONGO_URL_CONNECT_2 || "mongodb://localhost:27017/test",
+  process.env.MONGO_URL_CONNECT_2 || "mongodb://localhost:27017/test"
 );
 
 module.exports = {
