@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18"
+      - name: Install yarn
+        run: npm install -g yarn
 
   install-deps:
     name: Install dependencies
