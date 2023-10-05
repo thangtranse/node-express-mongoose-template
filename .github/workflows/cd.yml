@@ -11,25 +11,26 @@ jobs:
     runs-on: self-hosted
     timeout-minutes: 15
     steps:
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name:
         uses: actions/checkout@v4
   install-deps:
     name: Install dependencies
     runs-on: self-hosted
     timeout-minutes: 15
     needs: setup-repo
+    strategy:
+      matrix:
+        node-version: [18]
     steps:
-      - name: Setup Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: ${{ matrix.node-version }}
       - name: Install yarn
         run: npm install -g yarn
-
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo name=dir::$(yarn cache dir) >> GITHUB_OUTPUT
-
       - uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -41,24 +42,24 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       - name: Install dependencies
         run: |
           yarn install --production=false
-
   build:
     name: Build
     runs-on: self-hosted
     timeout-minutes: 15
     needs: install-deps
-
     strategy:
       matrix:
-        node-version: [18.x]
-
+        node-version: [18]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/checkout@v4
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install yarn
+        run: npm install -g yarn
       - name: Build
         run: |
           yarn build
