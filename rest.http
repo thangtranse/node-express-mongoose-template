@@ -68,3 +68,17 @@ Content-Type: application/json
 }
 ### CRM get list customer was register
 GET http://localhost:7777/api/v1/crm/list?limit=10&page=3&sort=name:asc,email:desc
+
+### Delete data CRM by id
+DELETE  http://localhost:7777/api/v1/crm?id=651eb03e03d8bc4b2b4e479a
+
+### Delete data CRM by list ids
+DELETE  http://localhost:7777/api/v1/crm/trash
+Content-Type: application/json
+
+{
+    "ids": ["651eb04103d8bc4b2b4e47ce", "651eb03f03d8bc4b2b4e47ac"]
+}
+
+### Get data CRM by id
+GET  http://localhost:7777/api/v1/crm?id=651eb04103d8bc4b2b4e47ce
