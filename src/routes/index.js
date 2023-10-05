@@ -2,6 +2,7 @@ const express = require("express");
 const createError = require("http-errors");
 
 const userRoute = require("./user.route");
+const CRMCustomerRoute = require("./crm-customer.route");
 
 module.exports = (app) => {
   app.use(express.json());
@@ -9,7 +10,8 @@ module.exports = (app) => {
     res.send("Hello World");
   });
 
-  app.use("/v1/api/user", userRoute);
+  app.use("/api/v1/user", userRoute);
+  app.use("/api/v1/crm", CRMCustomerRoute);
 
   app.get("/*", (req, res, next) => {
     next(createError.NotFound());

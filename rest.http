@@ -5,19 +5,19 @@ GET http://localhost:7777
 GET http://localhost:7777/abc
 
 ### User check error
-GET http://localhost:7777/v1/api/user/test-error-api
+GET http://localhost:7777/api/v1/user/test-error-api
 
 ### User Register
-POST http://localhost:7777/v1/api/user/register
+POST http://localhost:7777/api/v1/user/register
 Content-Type: application/json
 
 {
-    "email": "thang.tran.s.e4@gmail.com",
+    "email": "thang.tran.s.e5@gmail.com",
     "password": "abcd@123"
 }
 
 ### User Refresh Token
-POST http://localhost:7777/v1/api/user/refresh-token
+POST http://localhost:7777/api/v1/user/refresh-token
 Content-Type: application/json
 
 {
@@ -25,16 +25,26 @@ Content-Type: application/json
 }
 
 ### User Login
-POST http://localhost:7777/v1/api/user/login
+POST http://localhost:7777/api/v1/user/login
 Content-Type: application/json
 
 {
-    "email": "thang.tran.s.e@gmail.com",
+    "email": "thang.tran.s.e5@gmail.com",
     "password": "abcd@123"
 }
 
+### User login with google account
+POST http://localhost:7777/api/v1/user/login-google
+Content-Type: application/json
+
+{
+    "clientId": "602925150334-jn3jelo7lcu8efvuk1bopt46172jdkpd.apps.googleusercontent.com",
+    "credential": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI5YWM2MDFkMTMxZmQ0ZmZkNTU2ZmYwMzJhYWIxODg4ODBjZGUzYjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI2MDI5MjUxNTAzMzQtam4zamVsbzdsY3U4ZWZ2dWsxYm9wdDQ2MTcyamRrcGQuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI2MDI5MjUxNTAzMzQtam4zamVsbzdsY3U4ZWZ2dWsxYm9wdDQ2MTcyamRrcGQuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDMxNzA2NzcwMjA1MDI1OTg3MDAiLCJlbWFpbCI6InRoYW5ndHJhbi5zZUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNjk2MzQwNTIxLCJuYW1lIjoiVGhhbmcgVHJhbiBNaW5oIChzdW53b24pIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0ktN2dWU1lpdDlRQTBqQ2h1T1ZlajZiTkQ4RnFfNWtCQXlMME9LSm53aXNKQT1zOTYtYyIsImdpdmVuX25hbWUiOiJUaGFuZyIsImZhbWlseV9uYW1lIjoiVHJhbiBNaW5oIiwibG9jYWxlIjoidmkiLCJpYXQiOjE2OTYzNDA4MjEsImV4cCI6MTY5NjM0NDQyMSwianRpIjoiOTlkOTUwMTZjNDEzNjgwNzE4NWQwNWJlMzExYjJmMTNhYzkxYWQzOCJ9.VEMIxIrjDOTUC8qpNiQlYZWWY3QnQz2uZu8hWukc8PU5K9yK6j1NMNjh_tyYKr1o7bC4gM-sxNDWqlCqfbQsng9ZhlhaOo82hzxH5BiDgN_54qNkniFpE9EK4NjDseXH-Z_jjchB-6X6_LunLLBziigey0gApNn07uw3-csAKuNn-cGNYWsCZoW1dR6BJ2T0d0Bw4X8-vHkkBK16IW5y66NLDpOztV3XIcK49Q16s3yCfYjaP1XivZqqbFeUgpiaHFoOj31lA0woTB_tI5ys7BjYHDInWKRNMgPzzuIX2nKNMLkjWUd_dM3IrzCV_Xsi5Kqp9QM0BD9T5DTRwD1-gA",
+    "select_by": "btn"
+}
+
 ### User Logout
-DELETE http://localhost:7777/v1/api/user/logout
+DELETE http://localhost:7777/api/v1/user/logout
 Content-Type: application/json
 
 {
@@ -42,7 +52,19 @@ Content-Type: application/json
 }
 
 ### User get-list-account example Bear token
-GET http://localhost:7777/v1/api/user/get-list-account
+GET http://localhost:7777/api/v1/user/get-list-account
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTc3NjEsImV4cCI6MTY2MDExNzc5MX0.ckQCxnzHTmkj_4Mt55onOP4Rl1l1xCgab1N9LW6dFWs
 
 ### User get-list-account example Bearer token
+
+### CRM submit form register customer
+POST http://localhost:7777/api/v1/crm/register
+Content-Type: application/json
+
+{
+    "email": "thangtran.se@gmail.com",
+    "name": "Trần Minh Thắng",
+    "phone": "0989900814"
+}
+### CRM get list customer was register
+GET http://localhost:7777/api/v1/crm/list?limit=10&page=3&sort=name:asc,email:desc
