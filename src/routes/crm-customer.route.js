@@ -9,4 +9,10 @@ route.post("/register", crmCustomerController.register);
 
 route.get("/list", crmCustomerController.list);
 
+route.delete("/", crmCustomerController.deleteById);
+
+route.delete("/trash", crmCustomerController.deleteByIds);
+
+route.get("/", crmCustomerController.getDataById);
+
 module.exports = route;
