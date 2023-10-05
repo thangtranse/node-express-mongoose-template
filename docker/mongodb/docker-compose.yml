@@ -4,10 +4,9 @@
 #
 # Use root/example as user/password credentials
 # ---------------------------------------------
-version: '3.8'
+version: "3.8"
 
 services:
-
   mongo:
     image: mongo:7.0.2-jammy
     restart: always
@@ -19,17 +18,17 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password123
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_AUTH_USERNAME: root
-      ME_CONFIG_MONGODB_AUTH_PASSWORD: password123
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: password123
-      ME_CONFIG_MONGODB_URL: mongodb://root:password123@mongo:27017/
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_AUTH_USERNAME: root
+  #     ME_CONFIG_MONGODB_AUTH_PASSWORD: password123
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: password123
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:password123@mongo:27017/
 
 volumes:
   db:
