@@ -1,6 +1,9 @@
+/* eslint-disable func-names */
 const mongoose = require("mongoose");
 
 const dbConnected = require("../databases/connection.mongodb");
+
+const softDeletePlugin = require("./plugins/soft-delete.plugin");
 const { marketingChannels } = require("../constants/campaigns.const");
 
 const { Schema } = mongoose;
@@ -50,7 +53,15 @@ const schema = new Schema(
 );
 
 schema.index({ campaign: 1 });
-
 schema.index({ uploadedBy: 1 });
+
+schema.plugin(softDeletePlugin);
+
+schema.pre("save", function (next, _options) {
+  if (this.email) {
+    this.email = this.email.toLowerCase();
+  }
+  next();
+});
 
 module.exports = dbConnected.model("crm-customers", schema);
