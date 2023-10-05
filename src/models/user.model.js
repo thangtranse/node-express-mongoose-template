@@ -15,13 +15,37 @@ const userSchema = new Schema(
       unique: true,
       required: true,
     },
+    email: {
+      type: String,
+      lowercase: true,
+      unique: true,
+      required: true,
+    },
     password: {
       type: String,
       required: true,
     },
+    isSetPassword: {
+      type: Boolean,
+      default: false,
+    },
+    googleUserId: {
+      type: String,
+      default: null,
+    },
+    googleUserProfile: {
+      type: Object,
+      default: null,
+    },
+    avatar: {
+      type: String,
+      default: null,
+    },
   },
   { timestamps: true }
 );
+
+userSchema.index({ username: 1, email: 1 });
 
 // module.exports = {
 //   userTestModel: testConnection.model("user", userSchema),
@@ -41,6 +65,8 @@ userSchema.pre("save", async function (next, _options) {
     next(error);
   }
 });
+userSchema.index({ username: 1, email: 1 });
+userSchema.index({ googleUserId: 1 });
 
 userSchema.methods.isCheckPassword = (password) =>
   bcrypt.compare(password, this.password);

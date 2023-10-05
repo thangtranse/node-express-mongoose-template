@@ -11,6 +11,8 @@ route.post("/refresh-token", userController.refreshToken);
 
 route.post("/login", userController.login);
 
+route.post("/login-google", userController.loginWithGoogle);
+
 route.delete("/logout", userController.logout);
 
 route.get(

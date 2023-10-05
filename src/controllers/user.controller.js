@@ -1,7 +1,10 @@
 const createError = require("http-errors");
+const { OAuth2Client } = require("google-auth-library");
 
-const e = require("express");
-const { userValidate } = require("../helpers/validation");
+const {
+  userValidate,
+  loginWithGoogleValidate,
+} = require("../helpers/validation");
 const {
   signAccessToken,
   signRefreshToken,
@@ -10,18 +13,20 @@ const {
 } = require("../helpers/jwt_service");
 
 const UserModel = require("../models/user.model");
-const client = require("../databases/connection.redis");
+const redisClient = require("../databases/connection.redis");
+
+const { GOOGLE_CLIENT_ID } = process.env;
 
 module.exports = {
   register: async (req, res, next) => {
     try {
       const { error } = userValidate(req.body);
-      const { email, password } = req.body;
 
       if (error) {
         throw createError(error.details[0].message);
       }
 
+      const { email, password } = req.body;
       // if (!email || !password) {
       //   throw createError.BadRequest();
       // }
@@ -42,7 +47,9 @@ module.exports = {
 
       const user = new UserModel({
         username: email,
+        email,
         password,
+        isSetPassword: true,
       });
 
       const saveUser = await user.save();
@@ -75,10 +82,10 @@ module.exports = {
   login: async (req, res, next) => {
     try {
       const { error } = userValidate(res.body);
-      const { email, password } = req.body;
       if (error) {
         throw createError(error.details[0].message);
       }
+      const { email, password } = req.body;
       const isUser = await UserModel.findOne({
         username: email,
       });
@@ -101,6 +108,49 @@ module.exports = {
       next(error);
     }
   },
+  loginWithGoogle: async (req, res, next) => {
+    try {
+      const { error } = loginWithGoogleValidate(res.body);
+
+      if (error) {
+        throw createError(error.details[0].message);
+      }
+
+      const { credential } = req.body;
+      const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+      const ticket = await googleClient.verifyIdToken({
+        idToken: credential,
+        audience: this.GOOGLE_CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+      const googleUserId = ticket.getUserId();
+
+      if (!payload || !googleUserId) {
+        throw createError.NotFound("User not found");
+      }
+
+      let user = await UserModel.findOne({
+        googleUserId,
+      });
+
+      if (!user) {
+        user = new UserModel({
+          username: payload.email,
+          email: payload.email,
+          password: credential,
+          googleUserId,
+          googleUserProfile: payload,
+        });
+        await user.save();
+      }
+
+      const accessToken = await signAccessToken(user._id);
+      const refreshToken = await signRefreshToken(user._id);
+      return res.json({ accessToken, refreshToken });
+    } catch (error) {
+      next(error);
+    }
+  },
   logout: async (req, res, next) => {
     try {
       const { refreshToken } = req.body;
@@ -108,7 +158,7 @@ module.exports = {
         throw createError.BadRequest();
       }
       const { userId } = await verifyRefreshToken(refreshToken);
-      client.del(REDIS_KEY_DEFAULT + userId.toString(), (err) => {
+      redisClient.del(REDIS_KEY_DEFAULT + userId.toString(), (err) => {
         if (err) {
           throw createError.InternalServerError();
         }
