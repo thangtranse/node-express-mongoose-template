@@ -9,30 +9,70 @@ const { marketingChannels } = require("../constants/campaigns.const");
 const CRMCustomerModel = require("../models/crm-customer.model");
 
 module.exports = {
-  register: async (req, res, next) => {
+  deleteById: async (req, res, next) => {
     try {
-      const { error } = crmCustomerValidate(req.body);
+      const { id } = req.query;
 
-      if (error) {
-        throw createError(error.details[0].message);
+      if (!id) {
+        throw createError("Id is required");
       }
 
-      const { email, name, phone, channel } = req.body;
-      const customer = new CRMCustomerModel({
-        name,
-        email,
-        phone,
-        channel: channel || marketingChannels.website,
-      });
+      const customer = await CRMCustomerModel.softDelete({ _id: id });
 
-      const saveUser = await customer.save();
+      if (!customer) {
+        throw createError("Customer not found");
+      }
 
       return res.json({
         status: true,
-        data: saveUser,
+        message: "Customer deleted successfully",
       });
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
+    }
+  },
+  deleteByIds: async (req, res, next) => {
+    try {
+      const { ids } = req.body;
+
+      if (!ids || !ids.length) {
+        throw createError("Ids is required");
+      }
+
+      const customer = await CRMCustomerModel.softDelete({ _id: ids });
+
+      if (!customer) {
+        throw createError("Customer not found");
+      }
+
+      return res.json({
+        status: true,
+        message: "Customer deleted successfully",
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+  getDataById: async (req, res, next) => {
+    try {
+      const { id } = req.query;
+
+      if (!id) {
+        throw createError("Id is required");
+      }
+
+      const customer = await CRMCustomerModel.findOne({ _id: id });
+
+      if (!customer) {
+        throw createError("Customer not found");
+      }
+
+      return res.json({
+        status: true,
+        data: customer,
+      });
+    } catch (err) {
+      next(err);
     }
   },
   list: async (req, res, next) => {
@@ -66,6 +106,32 @@ module.exports = {
       });
     } catch (err) {
       next(err);
+    }
+  },
+  register: async (req, res, next) => {
+    try {
+      const { error } = crmCustomerValidate(req.body);
+
+      if (error) {
+        throw createError(error.details[0].message);
+      }
+
+      const { email, name, phone, channel } = req.body;
+      const customer = new CRMCustomerModel({
+        name,
+        email,
+        phone,
+        channel: channel || marketingChannels.website,
+      });
+
+      const saveUser = await customer.save();
+
+      return res.json({
+        status: true,
+        data: saveUser,
+      });
+    } catch (error) {
+      next(error);
     }
   },
 };
