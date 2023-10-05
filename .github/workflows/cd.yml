@@ -11,21 +11,17 @@ jobs:
     runs-on: self-hosted
     timeout-minutes: 15
     steps:
-      - uses: checkout
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
-        with:
-          path: ${{vars.PROJECT_PATH}}
-
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo name=dir::$(yarn cache dir) >> GITHUB_OUTPUT
 
       - uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: |
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            ${{ steps.yarn-cache-dir-path.outputs.name }}
             node_modules
             */*/node_modules
             .cache
@@ -48,12 +44,8 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: checkout
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
-        with:
-          path: ${{vars.PROJECT_PATH}}
-
       - name: Build
         run: |
           yarn build
