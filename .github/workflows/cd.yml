@@ -13,9 +13,6 @@ jobs:
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
-        with:
-          path: '${{vars.PROJECT_PATH}}'
-
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -49,9 +46,6 @@ jobs:
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
-        with:
-          path: '${{vars.PROJECT_PATH}}'
-
       - name: Build
         run: |
           yarn build
