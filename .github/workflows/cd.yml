@@ -33,7 +33,7 @@ jobs:
 
             yarn
 
-            echo "ENV=${{vars.WEB_ENV}}" >> .env
+            echo "ENV=${{vars.ENV}}" >> .env
 
             chmod +x ${{vars.PROJECT_PATH}}/scripts/prod.sh
             ${{vars.PROJECT_PATH}}/scripts/prod.sh
