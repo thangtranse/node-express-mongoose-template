@@ -1,0 +1,47 @@
+name: Install dependencies
+
+on: push
+env:
+  CI: true
+
+jobs:
+  setup-repo:
+    name: Setup repository
+    runs-on: self-hosted
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+  install-deps:
+    name: Install dependencies
+    runs-on: self-hosted
+    timeout-minutes: 15
+    needs: setup-repo
+    strategy:
+      matrix:
+        node-version: [18]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo name=dir::$(yarn cache dir) >> GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.name }}
+            node_modules
+            */*/node_modules
+            .cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: |
+          yarn install --production=false
