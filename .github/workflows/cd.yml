@@ -5,55 +5,35 @@ on:
     branches:
       - production
 
+env:
+  DEPLOY_ENV: production
+  GIT_BRANCH: production
+
 jobs:
-  setup-repo:
-    name: Setup repository
-    runs-on: self-hosted
-    timeout-minutes: 15
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name:
-        uses: actions/checkout@v4
-
-  install-deps:
-    name: Install dependencies
-    runs-on: self-hosted
-    timeout-minutes: 15
-    needs: setup-repo
-    strategy:
-      matrix:
-        node-version: [18]
-    steps:
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v0.1.10
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install yarn
-        run: npm install -g yarn
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo name=dir::$(yarn cache dir) >> GITHUB_OUTPUT
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: |
-            ${{ steps.yarn-cache-dir-path.outputs.name }}
-            node_modules
-            */*/node_modules
-            .cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install dependencies
-        run: |
-          yarn install --production=false
+          timeout: 600s
+          proxy_timeout: 600s
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ${{vars.PROJECT_PATH}}
 
-  start-server:
-    name: Start server
-    runs-on: self-hosted
-    timeout-minutes: 15
-    needs: install-deps
-    steps:
-      - name: Install yarn
-        run: |
-          chmod +x ./scripts/prod.sh
-          ./scripts/prod.sh
+            git checkout production
+            git reset --hard HEAD
+            git pull
+
+            yarn
+
+            echo "ENV=${{vars.WEB_ENV}}" >> .env
+
+            chmod +x ${{vars.PROJECT_PATH}}/scripts/prod.sh
+            ${{vars.PROJECT_PATH}}/scripts/prod.sh
