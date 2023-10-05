@@ -6,13 +6,19 @@ on:
       - production
 
 jobs:
-  setup-action:
-    name: setip action running
+  setup-repo:
+    name: setup action running
     runs-on: self-hosted
     timeout-minutes: 15
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
+  install-deps:
+    name: Install dependencies
+    runs-on: self-hosted
+    timeout-minutes: 15
+    needs: setup-repo
+    steps:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -20,12 +26,6 @@ jobs:
       - name: Install yarn
         run: npm install -g yarn
 
-  install-deps:
-    name: Install dependencies
-    runs-on: self-hosted
-    timeout-minutes: 15
-    needs: setup-action
-    steps:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo name=dir::$(yarn cache dir) >> GITHUB_OUTPUT
