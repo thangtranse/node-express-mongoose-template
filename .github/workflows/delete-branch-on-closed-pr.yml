@@ -2,12 +2,16 @@ name: "Delete branch on closed PR"
 on:
   pull_request:
     types: [closed]
+    branches-ignore:
+      - main
+      - production
 
 jobs:
   delete-branch:
+    name: Delete merged PR branch
     runs-on: ubuntu-latest
     steps:
-      - name: delete branch
+      - name: Delete branch
         uses: SvanBoxel/delete-merged-branch@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
