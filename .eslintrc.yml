@@ -16,3 +16,12 @@ rules:
     no-underscore-dangle: 0,
     no-unused-vars: ["error", { "argsIgnorePattern": "^_" }],
   }
+settings:
+  import/resolver:
+    alias:
+      map:
+        - ["@models", "./src/models/"]
+        - ["@constants", "./src/constants/"]
+        - ["@services", "./src/services/"]
+      extensions:
+        - .js
