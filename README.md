@@ -1,5 +1,3 @@
-# Repo basic!
-
 # Introduction
 
 This is a sample repository collected from the experience of implementing projects and referring to other tutorial pages (I have cited sources in the last section).
