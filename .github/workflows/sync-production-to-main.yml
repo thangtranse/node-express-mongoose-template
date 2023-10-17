@@ -1,0 +1,77 @@
+name: Sync production to main
+on:
+  push:
+    branches:
+      - production
+
+permissions:
+  pull-requests: write
+  contents: write
+
+env:
+  BRANCH_SYNC_NAME: syncing-production
+  FROM_BRANCH: production
+  TO_BRANCH: main
+  REVIEWER_BY: '["thangtranse"]'
+
+jobs:
+  sync-branches:
+    runs-on: ubuntu-latest
+    name: Syncing branches
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Create branch
+        id: create_branch
+        uses: peterjgrainger/action-create-branch@v2.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: "${{env.BRANCH_SYNC_NAME}}"
+
+      - name: Update branch
+        id: update_branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo 'Fetching branch'
+          git fetch
+          echo 'Checking out branch'
+          git checkout ${{env.BRANCH_SYNC_NAME}}
+          echo 'Resetting branch'
+          git reset --hard origin/${{env.FROM_BRANCH}}
+          echo 'Pushing branch'
+          git push --force
+
+  create-pull-request:
+    runs-on: ubuntu-latest
+    needs: sync-branches
+    name: Create Pull Request
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Opening pull request
+        id: pull
+        uses: tretuna/sync-branches@1.4.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FROM_BRANCH: "${{env.BRANCH_SYNC_NAME}}"
+          TO_BRANCH: "${{env.TO_BRANCH}}"
+          CONTENT_COMPARISON: true
+          PULL_REQUEST_TITLE: "Sync production to main with temporary branch"
+          PULL_REQUEST_BODY: "..."
+          REVIEWERS: ${{env.REVIEWER_BY}}
+
+      - name: Add labels
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            ignore release
+          number: ${{ steps.pull.outputs.PULL_REQUEST_NUMBER }}
