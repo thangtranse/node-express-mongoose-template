@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Deploy to VPS
-        uses: appleboy/ssh-action@v0.1.10
+        uses: appleboy/ssh-action@v1.0.0
         with:
           timeout: 600s
           proxy_timeout: 600s
