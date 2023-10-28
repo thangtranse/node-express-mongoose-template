@@ -59,7 +59,12 @@ module.exports = {
         throw createError("Id is required");
       }
 
-      return crmCustomerService.getDataById(id);
+      const customer = await crmCustomerService.getDataById(id);
+
+      return res.json({
+        status: true,
+        data: customer,
+      });
     } catch (err) {
       next(err);
     }
@@ -73,8 +78,11 @@ module.exports = {
       }
 
       const { page = 1, limit = 10, sort } = req.query;
+      const customers = await crmCustomerService.getList({ page, limit, sort });
 
-      return crmCustomerService.getList({ page, limit, sort });
+      return res.json({
+        ...customers,
+      });
     } catch (err) {
       next(err);
     }
