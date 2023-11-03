@@ -9,10 +9,12 @@ const signAccessToken = async (userId) =>
     const payload = {
       userId,
     };
+
     const secret = process.env.ACCESS_TOKEN_SECRET;
     const option = {
       expiresIn: "30s", // 10m 10s
     };
+
     JWT.sign(payload, secret, option, (err, token) => {
       if (err) reject(err);
       resolve(token);
@@ -28,6 +30,7 @@ const signRefreshToken = async (userId) =>
     const option = {
       expiresIn: "1d",
     };
+
     JWT.sign(payload, secret, option, (err, token) => {
       if (err) reject(err);
       redis.set(
@@ -52,6 +55,7 @@ const verifyAccessToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const bearerToken = authHeader.split(" ");
   const token = bearerToken[1];
+
   JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
     if (err) {
       if (err.name) {
@@ -68,7 +72,9 @@ const verifyAccessToken = (req, res, next) => {
       }
       return next(createError.Unauthorized(err.message));
     }
+
     req.payload = payload;
+
     next();
   });
 };

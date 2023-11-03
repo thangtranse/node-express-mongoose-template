@@ -6,6 +6,7 @@ const CRMCustomerRoute = require("./crm-customer.route");
 
 module.exports = (app) => {
   app.use(express.json());
+
   app.get("/", (req, res) => {
     res.send("Hello World");
   });
