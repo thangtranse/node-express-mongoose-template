@@ -11,9 +11,11 @@ The project includes:
 - [x] Services:
   - [x] Register account
   - [x] Login/Logout
+  - [x] Login with Google
   - [x] Retrieve token when expired (no need to log in again)
   - [x] Get a list of User authenticated by Token
   - [x] Upload file
+  - [x] Mini CRM
 
 # System configuration
 
