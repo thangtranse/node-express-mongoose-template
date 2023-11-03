@@ -7,28 +7,6 @@ const {
 } = require("../helpers/validation");
 
 module.exports = {
-  deleteById: async (req, res, next) => {
-    try {
-      const { id } = req.query;
-
-      if (!id) {
-        throw createError("Id is required");
-      }
-
-      const customer = await crmCustomerService.deleteById(id);
-
-      if (!customer) {
-        throw createError("Customer not found");
-      }
-
-      return res.json({
-        status: true,
-        message: "Customer deleted successfully",
-      });
-    } catch (err) {
-      next(err);
-    }
-  },
   deleteByIds: async (req, res, next) => {
     try {
       const { ids } = req.body;
