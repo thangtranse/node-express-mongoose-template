@@ -16,10 +16,22 @@ const storage = multer.diskStorage({
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, `${file.fieldname}-${uniqueSuffix}`);
   },
-  fieldSize: 5 * 1024 * 1024, // 5MB
-  fileSize: 5 * 1024 * 1024, // 5MB
 });
 
-const upload = multer({ storage });
+const fileFilter = (request, file, callback) => {
+  const acceptedFileTypes = ["image/jpeg", "image/png"];
+  return acceptedFileTypes.includes(file.mimetype)
+    ? callback(null, true)
+    : callback(null, false);
+};
 
-export default upload;
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: {
+    fileSize: 1024 * 1024 * 5, // 5 MB
+    fieldSize: 1024 * 1024 * 5, // 5MB
+  },
+});
+
+module.exports = upload;
