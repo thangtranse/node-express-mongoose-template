@@ -16,7 +16,7 @@ module.exports = {
       });
     }
     try {
-      await uploadImageService.image(request.file, request.payload.userId);
+      await uploadImageService.saveDB(request.file, request.payload.userId);
       return response.status(200).json({
         success: 1,
         message: "Image uploaded successfully",
@@ -40,7 +40,10 @@ module.exports = {
     const { imageUrls } = request.body;
 
     try {
-      const fileData = await uploadImageService.fetch(imageUrls);
+      const fileData = await uploadImageService.fetch(
+        imageUrls,
+        request.payload.userId
+      );
       const url = getFileUrl(fileData);
 
       return response.status(200).json({

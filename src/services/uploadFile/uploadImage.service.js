@@ -6,7 +6,7 @@ const UploadModel = require("@models/upload.model");
 const { getFileUrl, saveFileToLocal } = require("../../utils/fileUpload");
 
 module.exports = {
-  image: (file, uploadedByUserId) => {
+  saveDB: (file, uploadedByUserId) => {
     const upload = new UploadModel({
       ...file,
       path: getFileUrl(file),
