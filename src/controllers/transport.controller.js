@@ -29,5 +29,36 @@ module.exports = {
       });
     }
   },
-  fetch: () => {},
+  fetch: async (request, response) => {
+    if (!request.body.imageUrls) {
+      return response.status(400).json({
+        success: 0,
+        message: "No images found",
+      });
+    }
+
+    const { imageUrls } = request.body;
+
+    try {
+      const fileData = await uploadImageService.fetch(imageUrls);
+      const url = getFileUrl(fileData);
+
+      return response.status(200).json({
+        success: 1,
+        message: "Image fetched successfully",
+        imageUrl: url,
+        file: {
+          name: fileData.name,
+          size: fileData.size,
+          type: fileData.type,
+          mimetype: fileData.mimetype,
+        },
+      });
+    } catch (error) {
+      return response.status(500).json({
+        success: 0,
+        message: error.message,
+      });
+    }
+  },
 };

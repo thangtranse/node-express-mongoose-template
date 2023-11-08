@@ -6,6 +6,7 @@ const compression = require("compression");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
+const path = require("path");
 
 const helmetConfig = require("./configs/helmet.config");
 const corsConfig = require("./configs/cors.config");
@@ -43,6 +44,7 @@ app.use(
     extended: true,
   })
 );
+app.use(express.static(path.join(__dirname, "../public")));
 // Routes
 require("./routes/index")(app);
 

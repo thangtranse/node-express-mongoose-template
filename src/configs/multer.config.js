@@ -3,6 +3,21 @@ const fs = require("fs");
 const path = require("path");
 
 const FILE_PATH = path.join(__dirname, "../../public/uploads/");
+const MIME_TO_FORMAT = {
+  "text/html": "html",
+  "text/css": "css",
+  "text/javascript": "js",
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/gif": "gif",
+  "image/webp": "webp",
+  "audio/mpeg": "mp3",
+  "audio/ogg": "ogg",
+  "video/mp4": "mp4",
+  "application/pdf": "pdf",
+  "application/xml": "xml",
+  "application/json": "json",
+};
 
 if (!fs.existsSync(FILE_PATH)) {
   fs.mkdirSync(FILE_PATH);
@@ -12,9 +27,12 @@ const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, FILE_PATH);
   },
-  filename(req, file, cb) {
+  async filename(req, file, cb) {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    cb(null, `${file.fieldname}-${uniqueSuffix}`);
+    cb(
+      null,
+      `${file.fieldname}-${uniqueSuffix}.${MIME_TO_FORMAT[file.mimetype]}`
+    );
   },
 });
 
@@ -25,7 +43,7 @@ const fileFilter = (request, file, callback) => {
     : callback(null, false);
 };
 
-const upload = multer({
+const uploadMulter = multer({
   storage,
   fileFilter,
   limits: {
@@ -34,4 +52,5 @@ const upload = multer({
   },
 });
 
-module.exports = upload;
+module.exports = uploadMulter;
+module.exports.FILE_PATH = FILE_PATH;

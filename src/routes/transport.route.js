@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 
 const route = express.Router();
 
@@ -13,6 +14,11 @@ route.post(
   transportController.image
 );
 
-route.post("/fetch", verifyAccessToken, transportController.fetch);
+route.post(
+  "/fetch",
+  verifyAccessToken,
+  multer().none(),
+  transportController.fetch
+);
 
 module.exports = route;

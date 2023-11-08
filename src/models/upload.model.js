@@ -24,7 +24,7 @@ const fileSchema = new Schema(
     },
     encoding: {
       type: String,
-      required: true,
+      required: false,
     },
     uploadedBy: {
       type: Schema.Types.ObjectId,
