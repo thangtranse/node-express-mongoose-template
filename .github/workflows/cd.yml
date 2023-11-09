@@ -33,7 +33,7 @@ jobs:
 
             yarn
 
-            del .env
+            rm .env
             echo "${{vars.ENV}}" >> .env
 
             chmod +x ${{vars.PROJECT_PATH}}/scripts/prod.sh
