@@ -46,7 +46,19 @@ const crmCustomerValidate = (data) => {
   return schemaValidate.validate(data);
 };
 
+const postValidate = (data) => {
+  const schemaValidate = Joi.object({
+    title: Joi.string().required().max(100).trim(),
+    description: Joi.string().trim(),
+    content: Joi.object(),
+    draft: Joi.boolean(),
+    tags: Joi.array().items(Joi.string().trim()),
+  });
+  return schemaValidate.validate(data);
+};
+
 module.exports = {
+  postValidate,
   crmCustomerValidate,
   userValidate,
   loginWithGoogleValidate,

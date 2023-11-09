@@ -19,6 +19,6 @@ module.exports = {
     },
     crossOriginEmbedderPolicy: true,
     crossOriginOpenerPolicy: true,
-    crossOriginResourcePolicy: true,
+    crossOriginResourcePolicy: false,
   },
 };

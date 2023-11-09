@@ -3,24 +3,27 @@ const { uploadImageService } = require("../services/uploadFile");
 
 module.exports = {
   image: async (request, response) => {
-    if (!request.file) {
+    const { file } = request;
+    if (!file) {
       return response.status(400).json({
         success: 0,
         message: "No files found",
       });
     }
-    if (request.file.fieldname !== "image") {
+    if (file.fieldname !== "image") {
       return response.status(400).json({
         success: 0,
         message: "No images found",
       });
     }
     try {
-      await uploadImageService.saveDB(request.file, request.payload.userId);
+      await uploadImageService.saveDB(file, request.payload.userId);
       return response.status(200).json({
         success: 1,
         message: "Image uploaded successfully",
-        imageUrl: getFileUrl(request.file),
+        file: {
+          url: `${process.env.URL_HOST}/${getFileUrl(file)}`,
+        },
       });
     } catch (error) {
       return response.status(500).json({
@@ -49,8 +52,8 @@ module.exports = {
       return response.status(200).json({
         success: 1,
         message: "Image fetched successfully",
-        imageUrl: url,
         file: {
+          url: `http://localhost:7777/${getFileUrl(url)}`,
           name: fileData.name,
           size: fileData.size,
           type: fileData.type,
