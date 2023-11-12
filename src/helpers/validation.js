@@ -48,10 +48,11 @@ const crmCustomerValidate = (data) => {
 
 const postValidate = (data) => {
   const schemaValidate = Joi.object({
+    _id: Joi.string().optional(),
     title: Joi.string().required().max(100).trim(),
-    description: Joi.string().trim(),
+    description: Joi.string().required().trim(),
     content: Joi.object(),
-    draft: Joi.boolean(),
+    draft: Joi.boolean().default(true),
     tags: Joi.array().items(Joi.string().trim()),
   });
   return schemaValidate.validate(data);

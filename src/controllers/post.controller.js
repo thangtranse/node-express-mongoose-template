@@ -5,7 +5,7 @@ const { postService } = require("@services/post");
 const { postValidate, paginationValidate } = require("../helpers/validation");
 
 module.exports = {
-  create: async (req, res, next) => {
+  createOrUpdate: async (req, res, next) => {
     try {
       const { error } = postValidate(req.body);
 
@@ -18,7 +18,10 @@ module.exports = {
         author: req.payload.userId,
       });
 
-      const saveUser = await createPost.save();
+      const saveUser = await postModel.updateOne({ _id: createPost._id }, createPost, {
+        new: true,
+        upsert: true
+      });
 
       return res.json({
         status: true,
@@ -50,8 +53,7 @@ module.exports = {
   },
   getDataById: async (req, res, next) => {
     try {
-      const { id } = req.query;
-
+      const { id } = req.params;
       if (!id) {
         throw createError("Id is required");
       }

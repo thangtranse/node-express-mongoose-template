@@ -27,4 +27,5 @@ module.exports = {
       totalPages: Math.ceil(total / limit),
     };
   },
+  getDataById: (id) => postModel.findOne({ _id: id }),
 };
