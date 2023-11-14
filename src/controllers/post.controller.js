@@ -116,4 +116,20 @@ module.exports = {
       next(error);
     }
   },
+
+  getListByCustomer: async (req, res, next) => {
+    try {
+      const { error } = paginationValidate(req.query);
+      if (error) {
+        throw createError(error.details[0].message);
+      }
+      const { page = 1, limit = 10, sort } = req.query;
+      const data = await postService.getList({ page, limit, sort });
+      return res.json({
+        ...data,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 };

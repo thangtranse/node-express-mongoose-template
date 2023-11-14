@@ -19,10 +19,12 @@ module.exports = {
     try {
       await uploadImageService.saveDB(file, request.payload.userId);
       return response.status(200).json({
+        status: true, // default app
         success: 1,
         message: "Image uploaded successfully",
         file: {
           url: `${process.env.URL_HOST}/${getFileUrl(file)}`,
+          baseUrl: getFileUrl(file),
         },
       });
     } catch (error) {

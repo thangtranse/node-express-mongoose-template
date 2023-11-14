@@ -18,8 +18,16 @@ const schema = new Schema(
       type: String,
       required: false,
     },
+    renderType: {
+      type: String,
+      enum: ["editorJs", "html"],
+      default: "editorJs",
+    },
     content: {
       type: Object,
+    },
+    imagesProfile: {
+      type: Array,
     },
     author: {
       type: Schema.Types.ObjectId,
