@@ -77,7 +77,7 @@ module.exports = {
       }
 
       const { page = 1, limit = 10, sort } = req.query;
-      const data = await postService.getList({ page, limit, sort });
+      const data = await postService.getList({ page, limit, sort }, { where: {} });
 
       return res.json({
         ...data,
@@ -124,7 +124,7 @@ module.exports = {
         throw createError(error.details[0].message);
       }
       const { page = 1, limit = 10, sort } = req.query;
-      const data = await postService.getList({ page, limit, sort });
+      const data = await postService.getList({ page, limit, sort }, { where: { draft: false } });
       return res.json({
         ...data,
       });

@@ -3,7 +3,7 @@ const postModel = require("@models/post.model");
 module.exports = {
   deleteById: (id) => postModel.softDelete({ _id: id }),
   deleteByIds: (ids) => postModel.softDelete({ _id: [...ids] }),
-  getList: async ({ page, limit, sort }) => {
+  getList: async ({ page, limit, sort }, { where = {} }) => {
     const skip = (page - 1) * limit;
     let sortQuery = [];
     if (sort) {
@@ -14,7 +14,7 @@ module.exports = {
     }
 
     const data = await postModel
-      .find()
+      .find(where)
       .skip(skip)
       .limit(parseInt(limit, 10))
       .sort(sortQuery);
