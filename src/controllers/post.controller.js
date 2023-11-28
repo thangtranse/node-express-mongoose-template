@@ -34,7 +34,7 @@ module.exports = {
   deleteByIds: async (req, res, next) => {
     try {
       const { ids } = req.body;
-      if (!ids || !ids.length) {
+      if (!ids?.length) {
         throw createError("Ids is required");
       }
 

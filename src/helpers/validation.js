@@ -1,5 +1,4 @@
 const Joi = require("joi");
-const { RenderType } = require("../models/post.model");
 
 const paginationValidate = (data) => {
   const schemaValidate = Joi.object({
