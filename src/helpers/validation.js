@@ -38,11 +38,11 @@ const crmCustomerValidate = (data) => {
     phone: Joi.string()
       .pattern(/^(0|\+84)(3[2-9]|5[689]|7[0|6-9]|8[1-9]|9[0-9])(\d{7})$/)
       .required(),
-    email: Joi.string(),
+    email: Joi.string().optional().email().allow(''),
     address: Joi.string(),
     note: Joi.string(),
     channel: Joi.string(),
-  });
+  })
   return schemaValidate.validate(data);
 };
 
