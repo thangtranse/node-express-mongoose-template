@@ -36,6 +36,8 @@ REDIS_HOST=
 
 ACCESS_TOKEN_SECRET=
 REFRESH_TOKEN_SECRET=
+
+GOOGLE_CLIENT_ID=
 ```
 
 To get `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`, please run the `bash` command below, then use any KEY for both values.

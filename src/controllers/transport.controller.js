@@ -1,5 +1,5 @@
 const { getFileUrl } = require("../utils/fileUpload");
-const { uploadImageService } = require("../services/uploadFile");
+const { uploadService } = require("../services/uploadFile");
 
 module.exports = {
   image: async (request, response) => {
@@ -17,11 +17,48 @@ module.exports = {
       });
     }
     try {
-      await uploadImageService.saveDB(file, request.payload.userId);
+      await uploadService.saveDB(file, request.payload.userId);
       return response.status(200).json({
         status: true, // default app
         success: 1,
         message: "Image uploaded successfully",
+        file: {
+          url: `${process.env.URL_HOST}/${getFileUrl(file)}`,
+          baseUrl: getFileUrl(file),
+        },
+      });
+    } catch (error) {
+      return response.status(500).json({
+        success: 0,
+        message: error.message,
+      });
+    }
+  },
+  file: async (request, response) => {
+    const { file, body, payload } = request;
+    // Check if a file was uploaded
+    if (!file) {
+      return response.status(400).json({
+        success: 0,
+        message: "No files found",
+      });
+    }
+
+    try {
+      const fileExtension = file.mimetype ? file.mimetype : null;
+      if (fileExtension !== 'application/pdf') {
+        return response.status(400).json({
+          success: 0,
+          message: "No PDF file found",
+        });
+      }
+
+      await uploadService.saveDB(file, payload.userId, body)
+
+      return response.status(200).json({
+        status: true, // default app
+        success: 1,
+        message: "File uploaded successfully",
         file: {
           url: `${process.env.URL_HOST}/${getFileUrl(file)}`,
           baseUrl: getFileUrl(file),
@@ -45,7 +82,7 @@ module.exports = {
     const { imageUrls } = request.body;
 
     try {
-      const fileData = await uploadImageService.fetch(
+      const fileData = await uploadService.fetch(
         imageUrls,
         request.payload.userId
       );

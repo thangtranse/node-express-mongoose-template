@@ -6,11 +6,12 @@ const UploadModel = require("@models/upload.model");
 const { getFileUrl, saveFileToLocal } = require("../../utils/fileUpload");
 
 module.exports = {
-  saveDB: (file, uploadedByUserId) => {
+  saveDB: (file, uploadedByUserId, body = {}) => {
     const upload = new UploadModel({
       ...file,
       path: getFileUrl(file),
       uploadedBy: uploadedByUserId,
+      ...body,
     });
     return upload.save();
   },
@@ -37,4 +38,12 @@ module.exports = {
 
     return upload.save();
   },
+  getFileByActionTypeWhereLastUploaded: async (actionType) => {
+    const file = await UploadModel.findOne({ actionType })
+      .sort({ updatedAt: -1 })
+      .exec();
+    return {
+      file,
+    }
+  }
 };

@@ -26,6 +26,10 @@ const fileSchema = new Schema(
       type: String,
       required: false,
     },
+    actionType: {
+      type: String,
+      required: false,
+    },
     uploadedBy: {
       type: Schema.Types.ObjectId,
       ref: "User",

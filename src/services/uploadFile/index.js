@@ -1,6 +1,6 @@
 // index
-const uploadImageService = require("./uploadImage.service");
+const uploadService = require("./upload.service");
 
 module.exports = {
-  uploadImageService,
+  uploadService,
 };

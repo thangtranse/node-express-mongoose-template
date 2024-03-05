@@ -15,6 +15,13 @@ route.post(
 );
 
 route.post(
+  "/file",
+  verifyAccessToken,
+  upload.single("file"),
+  transportController.file
+);
+
+route.post(
   "/fetch",
   verifyAccessToken,
   multer().none(),
