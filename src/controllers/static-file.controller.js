@@ -15,6 +15,12 @@ module.exports = {
         });
       }
       const getFile = await uploadService.getFileByActionTypeWhereLastUploaded(actionType);
+      if (!getFile || !getFile?.file) {
+        return res.status(404).json({
+          success: 0,
+          message: "File not found",
+        });
+      }
       const { file } = getFile;
       const { path: filePath } = file;
       return res.download(path.join(__dirname, `../../public${filePath}`));
