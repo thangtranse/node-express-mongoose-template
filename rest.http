@@ -94,12 +94,13 @@ Content-Type: application/json
 {
     "id": "contact",
     "setting": {
-        "zalo": "0396873056",
-        "facebook-link": "https://www.facebook.com/thang.tran.s.e5",
-        "youtube-link": "https://www.youtube.com/channel/UC9",
-        "number-tel": "0983 185 952",
-        "email": "dd@skybuildplus.com",
-        "tax-code": "3603717515",
-        "address": "128/1, đường Cách Mạng Tháng 8, P. Quang Vinh, Tp. Biên Hoà, T. Đồng Nai, Việt Nam"
+        "zalo-number-tel": "",
+        "facebook-link": "",
+        "messenger-link": "",
+        "youtube-link": "",
+        "number-tel": "",
+        "email": "",
+        "tax-code": "",
+        "address": ""
     }
 }
