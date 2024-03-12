@@ -1,14 +1,14 @@
 
-GET http://localhost:7777
+GET http://localhost:3001
 
 ###
-GET http://localhost:7777/abc
+GET http://localhost:3001/abc
 
 ### User check error
-GET http://localhost:7777/api/v1/user/test-error-api
+GET http://localhost:3001/api/v1/user/test-error-api
 
 ### User Register
-POST http://localhost:7777/api/v1/user/register
+POST http://localhost:3001/api/v1/user/register
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### User Refresh Token
-POST http://localhost:7777/api/v1/user/refresh-token
+POST http://localhost:3001/api/v1/user/refresh-token
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ### User Login
-POST http://localhost:7777/api/v1/user/login
+POST http://localhost:3001/api/v1/user/login
 Content-Type: application/json
 
 {
@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ### User login with google account
-POST http://localhost:7777/api/v1/user/login-google
+POST http://localhost:3001/api/v1/user/login-google
 Content-Type: application/json
 
 {
@@ -44,7 +44,7 @@ Content-Type: application/json
 }
 
 ### User Logout
-DELETE http://localhost:7777/api/v1/user/logout
+DELETE http://localhost:3001/api/v1/user/logout
 Content-Type: application/json
 
 {
@@ -52,13 +52,13 @@ Content-Type: application/json
 }
 
 ### User get-list-account example Bear token
-GET http://localhost:7777/api/v1/user/get-list-account
+GET http://localhost:3001/api/v1/user/get-list-account
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmYzMmVhNmI4YTczMzQyZGY1MWEwYjYiLCJpYXQiOjE2NjAxMTc3NjEsImV4cCI6MTY2MDExNzc5MX0.ckQCxnzHTmkj_4Mt55onOP4Rl1l1xCgab1N9LW6dFWs
 
 ### User get-list-account example Bearer token
 
 ### CRM submit form register customer
-POST http://localhost:7777/api/v1/crm/register
+POST http://localhost:3001/api/v1/crm/register
 Content-Type: application/json
 
 {
@@ -67,13 +67,13 @@ Content-Type: application/json
     "phone": "0989900814"
 }
 ### CRM get list customer was register
-GET http://localhost:7777/api/v1/crm/list?limit=10&page=3&sort=name:asc,email:desc
+GET http://localhost:3001/api/v1/crm/list?limit=10&page=3&sort=name:asc,email:desc
 
 ### Delete data CRM by id
-DELETE  http://localhost:7777/api/v1/crm?id=651eb03e03d8bc4b2b4e479a
+DELETE  http://localhost:3001/api/v1/crm?id=651eb03e03d8bc4b2b4e479a
 
 ### Delete data CRM by list ids
-DELETE  http://localhost:7777/api/v1/crm/trash
+DELETE  http://localhost:3001/api/v1/crm/trash
 Content-Type: application/json
 
 {
@@ -81,4 +81,25 @@ Content-Type: application/json
 }
 
 ### Get data CRM by id
-GET  http://localhost:7777/api/v1/crm?id=651eb04103d8bc4b2b4e47ce
+GET  http://localhost:3001/api/v1/crm?id=651eb04103d8bc4b2b4e47ce
+
+### Get setting website
+GET  http://localhost:3001/api/v1/setting/configuration/contact
+
+### Update or create setting website
+POST  http://localhost:3001/api/v1/setting/configuration
+Authorization: Bearer thangtranse
+Content-Type: application/json
+
+{
+    "id": "contact",
+    "setting": {
+        "zalo": "0396873056",
+        "facebook-link": "https://www.facebook.com/thang.tran.s.e5",
+        "youtube-link": "https://www.youtube.com/channel/UC9",
+        "number-tel": "0983 185 952",
+        "email": "dd@skybuildplus.com",
+        "tax-code": "3603717515",
+        "address": "128/1, đường Cách Mạng Tháng 8, P. Quang Vinh, Tp. Biên Hoà, T. Đồng Nai, Việt Nam"
+    }
+}

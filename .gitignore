@@ -5,7 +5,7 @@
 **/.idea
 **/yarn.lock
 **/package-lock.json
-**/.env*
+**/.env
 **/.eslintcache
 **/logs/**
 **/docker/mongodb/db/**
