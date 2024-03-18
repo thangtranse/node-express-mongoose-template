@@ -7,6 +7,7 @@ const transportRoute = require("./transport.route");
 const postRoute = require("./post.route");
 const staticFileRoute = require("./static-file.route");
 const settingRoute = require("./setting.route");
+const constructionRoute = require("./construction.route");
 
 module.exports = (app) => {
   app.use(express.json());
@@ -21,6 +22,8 @@ module.exports = (app) => {
   app.use("/api/v1/post", postRoute);
   app.use("/api/v1/static-file", staticFileRoute);
   app.use("/api/v1/setting", settingRoute);
+  app.use("/api/v1/construction", constructionRoute);
+
 
   app.get("/*", (req, res, next) => {
     next(createError.NotFound());

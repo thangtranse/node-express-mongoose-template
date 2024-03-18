@@ -104,3 +104,15 @@ Content-Type: application/json
         "address": ""
     }
 }
+
+### Update or create setting website
+POST  http://localhost:3001/api/v1/construction
+Authorization: Bearer thangtranse
+Content-Type: application/json
+
+{
+    "title":"123",
+    "name":"12312",
+    "address":"12312",
+    "productUsed":"31231231"
+}
