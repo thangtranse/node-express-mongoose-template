@@ -7,7 +7,7 @@ const controller = require("../controllers/construction.controller");
 
 
 route.get("/", controller.list);
-route.get("/:id", verifyAccessToken, controller.getDataById);
+route.get("/:id", controller.getDataById);
 route.post("/", verifyAccessToken, controller.create);
 
 module.exports = route;
