@@ -46,6 +46,21 @@ const crmCustomerValidate = (data) => {
   return schemaValidate.validate(data);
 };
 
+const constructionValidate = (data) => {
+  const schemaValidate = Joi.object({
+    title: Joi.string(),
+    name: Joi.string(),
+    address: Joi.string(),
+    productUsed: Joi.string(),
+    gallery: Joi.array().items(Joi.object({
+      id: Joi.number(),
+      image: Joi.string(),
+      title: Joi.string(),
+    })),
+  })
+  return schemaValidate.validate(data);
+};
+
 const postValidate = (data) => {
   const schemaValidate = Joi.object({
     _id: Joi.string().optional(),
@@ -66,4 +81,5 @@ module.exports = {
   userValidate,
   loginWithGoogleValidate,
   paginationValidate,
+  constructionValidate
 };
