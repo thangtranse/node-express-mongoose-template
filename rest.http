@@ -106,13 +106,30 @@ Content-Type: application/json
 }
 
 ### Update or create setting website
-POST  http://localhost:3001/api/v1/construction
-Authorization: Bearer thangtranse
+POST  https://mywe.skybuildplus.com/api/v1/construction
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVmYzc0N2ZiZjk1YzZjM2I0YWI5NTQiLCJpYXQiOjE3MTA3NTc3MzUsImV4cCI6MTcxMDg0NDEzNX0.UdfMzuUrIuFkireo38DiHLPK14RyNy8rxTnE5s3qOEc
 Content-Type: application/json
 
 {
-    "title":"123",
-    "name":"12312",
-    "address":"12312",
-    "productUsed":"31231231"
+    "title": "Hội quán sinh viên - ĐHBK HCM",
+    "name": "Hội quán sinh viên - ĐHBK HCM",
+    "address": "Đại học Bách Khoa, Quận 10, Hồ Chí Minh",
+    "productUsed": "Coolmax poly đặc màu nâu trà",
+    "gallery": [
+    {
+        "id": "1",
+        "image": "/assets/du-an/hoiquansinhvienbachkhoa05-4062.jpg",
+        "title": "Dự án 1"
+    },
+    {
+        "id": "2",
+        "image": "/assets/du-an/hoiquansinhvienbachkhoa07-8761.jpg",
+        "title": "Dự án 2"
+    },
+    {
+        "id": "3",
+        "image": "/assets/du-an/hoiquansinhvienbachkhoa08-7271.jpg",
+        "title": "Dự án 1"
+    }
+    ]
 }
