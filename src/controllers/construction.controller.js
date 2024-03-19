@@ -37,7 +37,7 @@ module.exports = {
         throw createError("Ids is required");
       }
 
-      const customer = await crmCustomerService.deleteByIds(ids);
+      const customer = await constructionService.deleteByIds(ids);
 
       if (!customer) {
         throw createError("Customer not found");

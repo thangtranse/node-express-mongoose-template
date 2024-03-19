@@ -133,3 +133,155 @@ Content-Type: application/json
     }
     ]
 }
+
+### Update or create setting website
+POST  https://mywe.skybuildplus.com/api/v1/construction
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVmYzc0N2ZiZjk1YzZjM2I0YWI5NTQiLCJpYXQiOjE3MTA3NTc3MzUsImV4cCI6MTcxMDg0NDEzNX0.UdfMzuUrIuFkireo38DiHLPK14RyNy8rxTnE5s3qOEc
+Content-Type: application/json
+
+{
+    "title": "Mekong Centre - Sóc Trăng",
+    "name": "Mekong Centre - Sóc Trăng",
+    "address": "P.4, TP.Sóc Trăng",
+    "productUsed": "Coolmax poly đặc màu xám khói",
+    "gallery": [
+    {
+        "id": "1",
+        "image": "/assets/du-an/Mekongcentre101.jpeg",
+        "title": "Dự án 1"
+    },
+    {
+        "id": "2",
+        "image": "/assets/du-an/Mekongcentre102.jpg",
+        "title": "Dự án 1"
+    },
+    {
+        "id": "3",
+        "image": "/assets/du-an/Mekongcentre103.jpg",
+        "title": "Dự án 1"
+    }
+    ]
+}
+
+### Update or create setting website
+POST  https://mywe.skybuildplus.com/api/v1/construction
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVmYzc0N2ZiZjk1YzZjM2I0YWI5NTQiLCJpYXQiOjE3MTA3NTc3MzUsImV4cCI6MTcxMDg0NDEzNX0.UdfMzuUrIuFkireo38DiHLPK14RyNy8rxTnE5s3qOEc
+Content-Type: application/json
+
+{
+    "title": "Trường Hoàng Việt - Buôn Ma Thuột",
+
+    "name": "Trường Hoàng Việt - Buôn Ma Thuột",
+    "address": "P.Tân An, Buôn Mê Thuột, Đắk Lắk",
+    "productUsed": "Coolmax poly rỗng màu xanh biển",
+    "gallery": [
+    {
+        "id": "1",
+        "image": "/assets/du-an/truonghoangviet-buonmathuot-1.jpg",
+        "title": "Dự án 1"
+    },
+    {
+        "id": "2",
+        "image": "/assets/du-an/truonghoangviet-buonmathuot-2.jpg",
+        "title": "Dự án 1"
+    }
+    ]
+}
+
+### Update or create setting website
+POST  https://mywe.skybuildplus.com/api/v1/construction
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVmYzc0N2ZiZjk1YzZjM2I0YWI5NTQiLCJpYXQiOjE3MTA3NTc3MzUsImV4cCI6MTcxMDg0NDEzNX0.UdfMzuUrIuFkireo38DiHLPK14RyNy8rxTnE5s3qOEc
+Content-Type: application/json
+
+{
+      "title": "Nhà hàng - Nha Trang",
+      "name": "Nhà hàng - Nha Trang",
+      "address": "Tp.Nha Trang, Khánh Hòa",
+      "productUsed": "Coolmax poly đặc màu xanh biển",
+      "gallery": [
+        {
+          "id": "1",
+          "image": "/assets/du-an/nhahang-nhatrang-1.jpg",
+          "title": "Dự án 1"
+        },
+        {
+          "id": "2",
+          "image": "/assets/du-an/nhahang-nhatrang-2.jpg",
+          "title": "Dự án 1"
+        },
+        {
+          "id": "3",
+          "image": "/assets/du-an/nhahang-nhatrang-3.jpg",
+          "title": "Dự án 1"
+        }
+      ]
+    }
+
+
+### Update or create setting website
+POST  https://mywe.skybuildplus.com/api/v1/construction
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVmYzc0N2ZiZjk1YzZjM2I0YWI5NTQiLCJpYXQiOjE3MTA3NTc3MzUsImV4cCI6MTcxMDg0NDEzNX0.UdfMzuUrIuFkireo38DiHLPK14RyNy8rxTnE5s3qOEc
+Content-Type: application/json
+
+{
+      "title": "Showroom Honda - Campuchia",
+      "name": "Showroom Honda - Campuchia",
+      "address": "Campuchia",
+      "productUsed": "Coolmax poly đặc màu trắng trong",
+      "gallery": [
+        {
+          "id": "1",
+          "image": "/assets/du-an/showroom-honda-campuchia-1.jpg",
+          "title": "Dự án 1"
+        },
+        {
+          "id": "2",
+          "image": "/assets/du-an/showroom-honda-campuchia-2.jpg",
+          "title": "Dự án 1"
+        },
+        {
+          "id": "3",
+          "image": "/assets/du-an/showroom-honda-campuchia-3.jpg",
+          "title": "Dự án 1"
+        }
+      ]
+    }
+
+
+### Update or create setting website
+POST  https://mywe.skybuildplus.com/api/v1/construction
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVmYzc0N2ZiZjk1YzZjM2I0YWI5NTQiLCJpYXQiOjE3MTA3NTc3MzUsImV4cCI6MTcxMDg0NDEzNX0.UdfMzuUrIuFkireo38DiHLPK14RyNy8rxTnE5s3qOEc
+Content-Type: application/json
+
+{
+      "title": "Bãi đậu xe - Campuchia",
+      "name": "Bãi đậu xe - Campuchia",
+      "address": "Campuchia",
+      "productUsed": "Coolmax poly đặc màu xám khói",
+      "gallery": [
+        {
+          "id": "1",
+          "image": "/assets/du-an/baidauxe-campuchia-1.jpg",
+          "title": "Dự án 1"
+        }
+      ]
+    }
+
+### Update or create setting website
+POST  https://mywe.skybuildplus.com/api/v1/construction
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVmYzc0N2ZiZjk1YzZjM2I0YWI5NTQiLCJpYXQiOjE3MTA3NTc3MzUsImV4cCI6MTcxMDg0NDEzNX0.UdfMzuUrIuFkireo38DiHLPK14RyNy8rxTnE5s3qOEc
+Content-Type: application/json
+
+{
+      "title": "Vietinbank - Nghệ An",
+      "name": "Vietinbank - Nghệ An",
+      "address": "Tp.Vinh, Nghệ An",
+      "productUsed": "Coolmax poly đặc màu xanh biển",
+      "gallery": [
+        {
+          "id": "1",
+          "image": "/assets/du-an/vietinbank-nghean-1.jpg",
+          "title": "Dự án 1"
+        }
+      ]
+    }
