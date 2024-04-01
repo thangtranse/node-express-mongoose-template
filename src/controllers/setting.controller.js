@@ -25,9 +25,20 @@ module.exports = {
         throw createError("Id and Settings are required");
       }
 
+      const websiteContact = await settingModel.findOne({ key: id });
+
+      if (!websiteContact) {
+        throw createError("Key not found");
+      }
+
+      const updating = {
+        ...setting,
+        ...websiteContact?.setting,
+      }
+
       const updateOrCreate = await settingModel.updateOne(
         { key: id },
-        { $set: { setting } },
+        { $set: { setting: updating } },
         { upsert: true }
       );
 
