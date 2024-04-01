@@ -32,8 +32,8 @@ module.exports = {
       }
 
       const updating = {
-        ...setting,
         ...websiteContact?.setting,
+        ...setting,
       }
 
       const updateOrCreate = await settingModel.updateOne(
