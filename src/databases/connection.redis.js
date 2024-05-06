@@ -2,10 +2,12 @@
 /* eslint-disable new-cap */
 const redis = require("ioredis");
 
-const client = new redis({
+const argConnection = process.env.REDIS_URI || {
   port: process.env.REDIS_PORT || 6379,
   host: process.env.REDIS_HOST || "localhost",
-});
+};
+
+const client = new redis(argConnection);
 
 client.ping((err, pong) => {
   console.log(`Redis- ping -> pong:: ${pong}`);
