@@ -5,7 +5,6 @@ const languageMiddleware = (req, res, next) => {
     const supportedLanguages = ['en', 'vi'];
 
     const acceptLanguage = req.headers['accept-language'];
-    console.log('acceptLanguage', acceptLanguage)
 
     let language = defaultLanguage;
 
