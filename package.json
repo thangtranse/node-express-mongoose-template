@@ -17,6 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/thangtranse/node-express-mongoose-template.git"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "keywords": [
     "nodejs"
   ],
@@ -40,6 +43,9 @@
     "google-auth-library": "^9.1.0",
     "helmet": "^7.0.0",
     "http-errors": "^2.0.0",
+    "i18next": "^23.11.4",
+    "i18next-fs-backend": "^2.3.1",
+    "i18next-http-middleware": "^3.6.0",
     "ioredis": "^5.2.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^9.0.2",
