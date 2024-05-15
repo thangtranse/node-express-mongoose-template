@@ -2,7 +2,7 @@ const express = require("express");
 
 const route = express.Router();
 
-const { verifyAccessToken } = require("../helpers/jwt_service");
+const verifyAccessToken = require("../middlewares/access-token.middleware");
 const userController = require("../controllers/user.controller");
 
 route.post("/register", userController.register);
