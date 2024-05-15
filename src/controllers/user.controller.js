@@ -180,7 +180,7 @@ module.exports = {
   },
   testErrorApi: async (req, res, next) => {
     try {
-      return res.json({ status: true });
+      return res.json({ status: true, language: req.language ?? 'error' });
     } catch (error) {
       next(error);
     }

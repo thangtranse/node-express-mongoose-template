@@ -5,11 +5,16 @@ const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
 const cors = require("cors");
+
+const i18nextMiddleware = require('i18next-http-middleware');
 const helmet = require("helmet");
 const path = require("path");
 
+const i18next = require('./configs/i18n.config');
 const helmetConfig = require("./configs/helmet.config");
 const corsConfig = require("./configs/cors.config");
+
+const languageMiddleware = require('./middlewares/language.middleware');
 
 const app = express();
 
@@ -28,6 +33,8 @@ app.use(
     },
   })
 );
+app.use(i18nextMiddleware.handle(i18next));
+app.use(languageMiddleware);
 
 const logEvents = require("./helpers/logs_events");
 

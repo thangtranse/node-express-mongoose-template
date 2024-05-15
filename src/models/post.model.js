@@ -6,25 +6,29 @@ const { Schema } = mongoose;
 const softDeletePlugin = require("./plugins/soft-delete.plugin");
 const dbConnected = require("../databases/connection.mongodb");
 
+const PostDictionary = {
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 100,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
+  content: {
+    type: Object,
+  },
+}
+
 const schema = new Schema(
   {
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-      maxlength: 100,
-    },
-    description: {
-      type: String,
-      required: false,
-    },
+    ...PostDictionary,
     renderType: {
       type: String,
       enum: ["editorJs", "html"],
       default: "editorJs",
-    },
-    content: {
-      type: Object,
     },
     imagesProfile: {
       type: Array,
@@ -48,6 +52,9 @@ const schema = new Schema(
         trim: true,
       },
     ],
+    multilingual: {
+      en: PostDictionary,
+    }
   },
   { timestamps: true }
 );
