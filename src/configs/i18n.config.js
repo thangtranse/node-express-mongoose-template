@@ -14,7 +14,7 @@ i18next
         }
     }, (err, t) => {
         if (err) return console.error(err);
-        console.log('i18next is ready...');
+        console.log('i18next is ready!');
         console.log(t('node.welcome'));
         console.log(t('node.welcome', { lng: 'en' }));
     });
